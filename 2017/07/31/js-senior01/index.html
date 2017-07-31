@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="定义函数,变量提升," />
 
 
 
@@ -93,16 +93,18 @@
 
 
 
-<meta name="description" content="记录学习点滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Duchengqing-Blog">
-<meta property="og:url" content="duchengqing.online/tags/多态/index.html">
+<meta name="description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
+<meta name="keywords" content="定义函数,变量提升">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript高级 第一天">
+<meta property="og:url" content="duchengqing.online/2017/07/31/js-senior01/index.html">
 <meta property="og:site_name" content="Duchengqing-Blog">
-<meta property="og:description" content="记录学习点滴">
+<meta property="og:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-31T09:40:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Duchengqing-Blog">
-<meta name="twitter:description" content="记录学习点滴">
+<meta name="twitter:title" content="Javascript高级 第一天">
+<meta name="twitter:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
 
 
 
@@ -130,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="duchengqing.online/tags/多态/"/>
+  <link rel="canonical" href="duchengqing.online/2017/07/31/js-senior01/"/>
 
 
 
 
 
-  <title>标签: 多态 | Duchengqing-Blog</title>
+  <title>Javascript高级 第一天 | Duchengqing-Blog</title>
   
 
 
@@ -161,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -309,44 +311,201 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>多态<small>标签</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="duchengqing.online/2017/07/31/js-senior01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Duchengqing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang-1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Duchengqing-Blog">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript高级 第一天</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T21:44:20+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h5 id="1-函数是js中的一等公民"><a href="#1-函数是js中的一等公民" class="headerlink" title="1. 函数是js中的一等公民"></a>1. 函数是js中的一等公民</h5><ol>
+<li>函数可以作为方法，封装一段可以重复使用的代码.</li>
+<li>在js中，函数也是对象，js的面向对象是通过函数实现的.</li>
+<li>在js中，函数可以用来传递数据.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function f(x)&#123;</div><div class="line">    var xx</div><div class="line">    if(!x)&#123;</div><div class="line">        xx = 100</div><div class="line">    &#125;else&#123;</div><div class="line">        xx = x</div><div class="line">    &#125;</div><div class="line">    return  function(n)&#123;</div><div class="line">        console.log(Math.pow(xx,n))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Javascript的作用域是函数级作用域，无块级作用域</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="2-定义一个函数的几种方法"><a href="#2-定义一个函数的几种方法" class="headerlink" title="2.定义一个函数的几种方法"></a>2.定义一个函数的几种方法</h5><ol>
+<li>var f =function(){}</li>
+<li>function f(){}</li>
+<li>new Function()/Function(){}</li>
+<li><p>匿名函数与立即执行函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;)()      //匿名函数</div><div class="line">!function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;()       //立即执行函数</div></pre></td></tr></table></figure>
+</li>
+<li><p>例子(匿名函数与闭包)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var lunbo = (function()&#123;</div><div class="line">    var page = 11</div><div class="line">    var ctx =1</div><div class="line">    function run()&#123;</div><div class="line">        console.log(&apos;run&apos;)</div><div class="line">    &#125;</div><div class="line">    return&#123;</div><div class="line">        page : page,</div><div class="line">        ctx : ctx,</div><div class="line">        run : run</div><div class="line">    &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="3-变量提升"><a href="#3-变量提升" class="headerlink" title="3.变量提升"></a>3.变量提升</h5><ol>
+<li><p>变量声明，函数声明语句会提前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(str)  //打印出：aaa</div><div class="line">var str = &apos;aaa&apos;</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line"></div><div class="line">var str</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line">str = &apos;bbb&apos;</div><div class="line">console.log(str)  //打印出：bbb</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略)</p>
+</li>
+<li>js是基于事件机制的的单线程语言<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">同步队列:[line1,line2,line3]</div><div class="line">异步队列:[setTimeout]</div><div class="line">//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利</div><div class="line">function factory(name,attack,defence,health,skill) &#123;</div><div class="line">    this.name = name;</div><div class="line">    this.attack = attack;</div><div class="line">    this.defence = defence;</div><div class="line">    this.health = health;</div><div class="line">    this.skill = skill;</div><div class="line">    var zet  = this ; </div><div class="line">    this.fight = function (target) &#123;</div><div class="line">        var meReduce = target.attack - this.defence</div><div class="line">        var tarReduce = this.attack - target.defence</div><div class="line">        var meBeated = Math.ceil(this.health/meReduce)</div><div class="line">        var tarBeated = Math.ceil(target.health/tarReduce)</div><div class="line">        var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated</div><div class="line">        var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos;</div><div class="line">        var healthM = this.health</div><div class="line">        var healthT = target.health</div><div class="line">        for(var i = 1 ; i&lt;=turns; i++)&#123;</div><div class="line">            healthM -= meReduce</div><div class="line">            healthM = healthM &lt; 0 ? 0 : healthM</div><div class="line">            !function (a,n) &#123;</div><div class="line">                setTimeout(function()&#123;</div><div class="line">                    console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a)							</div><div class="line">                &#125;,1000*n)	</div><div class="line">            &#125;(healthM,i)</div><div class="line">            if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(target.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">                break</div><div class="line">            &#125;</div><div class="line">            healthT -= tarReduce</div><div class="line">            healthT = healthT &lt; 0 ? 0 : healthT</div><div class="line">            !function (b,n) &#123;</div><div class="line">                setTimeout(function () &#123;</div><div class="line">                    console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b)							</div><div class="line">                &#125;,1000*n)									</div><div class="line">            &#125;(healthT,i)</div><div class="line">            if(win == &apos;me&apos; &amp;&amp; i == turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(zet.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);</div><div class="line">var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);</div><div class="line">zilong.fight(xingshi);</div></pre></td></tr></table></figure>
+</li>
+</ol>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/07/31/js-senior03/" itemprop="url">
-              
-                <span itemprop="name">Javascript高级 第三天</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-31T21:44:20+08:00"
-              content="2017-07-31" >
-          07-31
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/定义函数/" rel="tag"># 定义函数</a>
+          
+            <a href="/tags/变量提升/" rel="tag"># 变量提升</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/31/js-senior02/" rel="next" title="Javascript高级 第二天">
+                <i class="fa fa-chevron-left"></i> Javascript高级 第二天
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/31/canvas/" rel="prev" title="Canvas">
+                Canvas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -354,6 +513,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -374,8 +537,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/touxiang-1.png"
@@ -459,6 +631,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-函数是js中的一等公民"><span class="nav-number">1.</span> <span class="nav-text">1. 函数是js中的一等公民</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-定义一个函数的几种方法"><span class="nav-number">2.</span> <span class="nav-text">2.定义一个函数的几种方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-变量提升"><span class="nav-number">3.</span> <span class="nav-text">3.变量提升</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -569,10 +757,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 

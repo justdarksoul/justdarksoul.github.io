@@ -1,374 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[ECMAscipt6 es6第二天]]></title>
-      <url>/2017/07/31/ES602/</url>
-      <content type="html"><![CDATA[<h4 id="1-ES6的模块系统"><a href="#1-ES6的模块系统" class="headerlink" title="1. ES6的模块系统"></a>1. ES6的模块系统</h4><p>Es6的模块系统现在浏览器还玩不了，需要将写有es6模块系统代码的文件重新编译成浏览器可以识别的低版本js才能运行</p>
-<p>Es6的模块主要就是两个关键字 export和import</p>
-<p>Export是导出（暴露）数据，Import是导入数据</p>
-<p>Export方法请记住两种用法:</p>
-<ol>
-<li>export default +数据 （数据可以是所有数据类型）</li>
-<li>export {  }  对象里面是数据 </li>
-</ol>
-<p>import方法请记住两种用法，分别对应export的两种用法:</p>
-<ol>
-<li>import 变量名 from 路径,此时 变量名你可以任意去取名 路径是相对路径的字符串,此时该变量名对应的变量获得的就是路径对应模块所export default出来的数据</li>
-<li>import { 变量名 } from 路径,此时变量名要想获得数据，则应该和路径对应的模块所 export {。。。。} 内部的变量名对应，只要对应上了，就可以拿到相应的值，这种场景针对你希望获得某个模块的部分功能，而不是加载整个模块</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> ES6 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Export </tag>
-            
-            <tag> Import </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Javascript高级 第五天]]></title>
-      <url>/2017/07/31/js-senior05/</url>
-      <content type="html"><![CDATA[<h4 id="1-Promise"><a href="#1-Promise" class="headerlink" title="1. Promise"></a>1. Promise</h4><p>Promise是用来解决异步编程的一个规范，Bluebird的库就实现了promise，随后2015年发布的es2015（es6）就已经实现了promise对象</p>
-<ol>
-<li><p>对象的状态不受外界影响</p>
-<p> 一个promise会有如下三种状态(只会在这三种状态中取一):</p>
-<ol>
-<li>pending(进行中)</li>
-<li>resolved(已完成)</li>
-<li><p>rejected(已拒绝)</p>
-<p>(只有promise内部决议方法可以改变promise的状态)</p>
-</li>
-</ol>
-</li>
-<li><p>状态一经更改，不会再变</p>
-<p> Promise的状态改变只有两种可能：</p>
-<ol>
-<li>pending =&gt;resolved</li>
-<li>pending =&gt;rejected</li>
-</ol>
-</li>
-</ol>
-<h4 id="2-Promise构造函数接收方法"><a href="#2-Promise构造函数接收方法" class="headerlink" title="2. Promise构造函数接收方法"></a>2. Promise构造函数接收方法</h4><p>Promise.all([ p , p2, p3])</p>
-<p>该方法接收一个promise数组，返回一个大promise 外层大promise的决议结果等于传入promise数组内的所有Promise决议的“与”运算的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">function learnHtmlAndCss() &#123;</div><div class="line">    return new Promise(function (resolve,reject) &#123;</div><div class="line">        console.log(&apos;开始学习html和css&apos;)</div><div class="line">        setTimeout(function () &#123;</div><div class="line">            if (Math.random()&gt;0.5) &#123;</div><div class="line">                console.log(&apos;html和css基础我学会啦&apos;)</div><div class="line">                resolve(&apos;get them(html css基础)&apos;)    </div><div class="line">            &#125; else &#123;</div><div class="line">                console.log(&apos;学习css和html失败&apos;)</div><div class="line">                reject(&apos;学习css和html失败&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;,7000)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">function learnJavascriptBase() &#123;</div><div class="line">    return new Promise(function (resolve,reject) &#123;</div><div class="line">        console.log(&apos;开始学Javascript基础&apos;)</div><div class="line">        setTimeout(function () &#123;</div><div class="line">            if (Math.random()&gt;0.5) &#123;</div><div class="line">                console.log(&apos;js基础我学会啦&apos;)</div><div class="line">                resolve(&apos;get them(javascript base)&apos;)                        </div><div class="line">            &#125; else &#123;</div><div class="line">                console.log(&apos;学习js基础失败&apos;)</div><div class="line">                reject(&apos;学习js基础失败&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;,3000)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">function learnFrontEnd(...arr) &#123;</div><div class="line">    return Promise.all(arr)</div><div class="line">&#125;</div><div class="line">learnFrontEnd(learnJavascriptBase(),learnHtmlAndCss()).then(</div><div class="line">    function (datas) &#123;</div><div class="line">        console.log(&apos;学业已成&apos;)</div><div class="line">        console.log(datas)</div><div class="line">    &#125;,</div><div class="line">    function (error) &#123;</div><div class="line">        console.log(&apos;失败,请努力&apos;)</div><div class="line">        console.log(&apos;失败原因：&apos;+error)</div><div class="line">    &#125;</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>Promise.race([p, p2, p3])</p>
-<p>该方法接收一个promise数组，返回一个大promise，外层大promise的决议结果等于传入promise数组内的第一个决议的promise的决议结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">function learnHtmlAndCss() &#123;</div><div class="line">    return new Promise(function (resolve,reject) &#123;</div><div class="line">        console.log(&apos;开始学习html和css&apos;)</div><div class="line">        setTimeout(function () &#123;</div><div class="line">            if (Math.random()&gt;0.5) &#123;</div><div class="line">                console.log(&apos;html和css基础我学会啦&apos;)</div><div class="line">                resolve(&apos;get them(html css基础)&apos;)    </div><div class="line">            &#125; else &#123;</div><div class="line">                console.log(&apos;学习css和html失败&apos;)</div><div class="line">                reject(&apos;学习css和html失败&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;,7000)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">function learnJavascriptBase() &#123;</div><div class="line">    return new Promise(function (resolve,reject) &#123;</div><div class="line">        console.log(&apos;开始学Javascript基础&apos;)</div><div class="line">        setTimeout(function () &#123;</div><div class="line">            if (Math.random()&gt;0.5) &#123;</div><div class="line">                console.log(&apos;js基础我学会啦&apos;)</div><div class="line">                resolve(&apos;get them(javascript base)&apos;)                        </div><div class="line">            &#125; else &#123;</div><div class="line">                console.log(&apos;学习js基础失败&apos;)</div><div class="line">                reject(&apos;学习js基础失败&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;,3000)</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line">function learnSkill(...arr) &#123;</div><div class="line">    return Promise.race(arr)</div><div class="line">&#125;</div><div class="line">learnSkill(learnHtmlAndCss(),learnJavascriptBase()).then(</div><div class="line">    function (d) &#123;</div><div class="line">        console.log(d)</div><div class="line">        console.log(&apos;该去学习了&apos;)</div><div class="line">    &#125;,</div><div class="line">    function (e) &#123;</div><div class="line">        console.log(e)</div><div class="line">        console.log(&apos;继续努力&apos;)</div><div class="line">    &#125;</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>then(f1,f2)方法将会返回一个新的Promise对象，意味着可以链式调用<br>在then方法中f1代表成功回调，f2代表失败回调<br>而在f1和f2中返回值或函数本身运行的状态会影响下一个then方法的抉择<br>而不是抉择f1和f2抉择了下一个then方法的抉择<br>说白了每一个then方法中包含了某个动作 这个动作可能是在成功回调中<br>也可能出现在失败回调中，也可能是独立的两个动作，但是这个then方法只可能走其中一个动作，且这个动作的成功或者失败决定了下一个then方法选择成功回调或者失败回调，而非这个动作出现在上一个then方法的成功回调还是失败回调决定下一个then方法的抉择</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">var p = new Promise(function (resolve,reject) &#123;</div><div class="line">    var r =Math.random()</div><div class="line">    if (r&gt;0.5) &#123;</div><div class="line">        resolve(r)</div><div class="line">    &#125; else &#123;</div><div class="line">        reject(r)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">p.then(function (data) &#123;</div><div class="line">    console.log(&apos;data:&apos;+data)</div><div class="line">&#125;,</div><div class="line">function (err) &#123;</div><div class="line">    console.log(&apos;err:&apos;+err)</div><div class="line">&#125;</div><div class="line">)</div><div class="line"></div><div class="line">var o = new Promise(function (resolve,reject) &#123;</div><div class="line">    setTimeout(function() &#123;</div><div class="line">        resolve(&apos;promise&apos;)</div><div class="line">    &#125;, 500);</div><div class="line">&#125;)</div><div class="line">o.then(</div><div class="line">    function (data) &#123;</div><div class="line">        console.log(&apos;data:&apos;+data)</div><div class="line">        return &apos;second promise&apos;</div><div class="line">    &#125;,</div><div class="line">    function (err) &#123;</div><div class="line">        console.log(&apos;err:&apos;+err)</div><div class="line">    &#125;</div><div class="line">).then(</div><div class="line">    function (d) &#123;</div><div class="line">        console.log(&apos;d:&apos;+d)</div><div class="line">    &#125;,</div><div class="line">    function (e) &#123;</div><div class="line">        console.log(&apos;e:&apos;+e)</div><div class="line">    &#125;</div><div class="line">)</div><div class="line"></div><div class="line">var getUp = new Promise(function (resolve,reject) &#123;</div><div class="line">    var r = Math.randow()</div><div class="line">    if (r&gt;0.5) &#123;</div><div class="line">        resolve(&apos;起床成功&apos;)</div><div class="line">    &#125; else &#123;</div><div class="line">        reject(&apos;起床失败&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">getUp.then(</div><div class="line">    function (d) &#123;</div><div class="line">        console.log(&apos;d:&apos;+d)</div><div class="line">    &#125;,</div><div class="line">    function (e) &#123;</div><div class="line">        console.log(&apos;e:&apos;+e)</div><div class="line">    &#125;</div><div class="line">)</div></pre></td></tr></table></figure>]]></content>
-      
-        <categories>
-            
-            <category> Javascript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Promise </tag>
-            
-            <tag> then </tag>
-            
-            <tag> resolve </tag>
-            
-            <tag> reject </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Javascript高级 第四天]]></title>
-      <url>/2017/07/31/js-senior04/</url>
-      <content type="html"><![CDATA[<h4 id="1-Js的第七种数据类型-symbol"><a href="#1-Js的第七种数据类型-symbol" class="headerlink" title="1. Js的第七种数据类型 symbol"></a>1. Js的第七种数据类型 symbol</h4><p>每一个通过symbol生成的数据都是独一无二的，所以不用担心重名的问题<br>以Symbol数据类型为对象键名的时候，无法被for-of或者for-in遍历出来<br>同样也不会被遍历器方法返回（entry() keys()之类的方法）Object.getOwnPropertySymbols( obj )这个方法返回一个数组，里面包含所有symbol属性的键名</p>
-<p>*以Symbol类型为键名的键值转字符串会报错</p>
-<h4 id="2-Symbol-for-Symbol-keyfor"><a href="#2-Symbol-for-Symbol-keyfor" class="headerlink" title="2. Symbol.for()/Symbol.keyfor()"></a>2. Symbol.for()/Symbol.keyfor()</h4><p>每一个通过Symbol（）创建的symbol类型的值都是独一无二的，即便是传入相同的参数或者不传，两个symbol值都是不相等的</p>
-<p>而通过Symbol.for()方法创建的symbol值，传入相同的参数名如Symbol.for(‘foo’)，则两次调用返回的symbol值 s1和s2是相等的</p>
-<p>本质：在调用Symbol.for的时候，会先去找，如果找到就返回该值，如果找不到，就创建一个新的</p>
-<h4 id="3-Js中的异步"><a href="#3-Js中的异步" class="headerlink" title="3. Js中的异步"></a>3. Js中的异步</h4><p>在es6之前，我们处理异步的方式有如下几种：</p>
-<ol>
-<li>回调</li>
-<li>事件</li>
-</ol>
-<p>Es6提供了 Promise来解决异步问题</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function * f()&#123;</div><div class="line">    yield …</div><div class="line">    yield …</div><div class="line">    return …</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</code></pre><ol>
-<li>Generator函数在执行的时候并没有真正执行，只是返回了一个遍历器对象</li>
-<li>我们可以通过对遍历器对象调用next方法来跑generator函数的内部代码</li>
-<li>每调用一次next，对应的generator函数就会从上一次执行的代码结尾处（或函数开头）开始执行，直到遇到下一个yield语句或者return语句，如果遇到yield语句，会将yield语句后面的表达式的值返回，如果遇到return语句，同样会将return后面的表达式的值当成返回值返回，并将返回对象的done置为false</li>
-</ol>
-<p>Next方法的参数</p>
-<ol>
-<li>Yield表达式本身没有返回值，或者说返回值为undefined</li>
-<li>Next()所传入的参数会被赋值给当前yield表达式的返回值</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Javascript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> symbol </tag>
-            
-            <tag> Promise </tag>
-            
-            <tag> Generator </tag>
-            
-            <tag> Next </tag>
-            
-            <tag> yield </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Canvas]]></title>
-      <url>/2017/07/31/canvas/</url>
-      <content type="html"><![CDATA[<h4 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas:"></a>Canvas:</h4><pre><code>使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值
-//canvas元素必须有一个id
-document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;)
-var canvas = document.getElementById(&apos;canvas&apos;)
-var ctx = canvas.getContext(&apos;2d&apos;)
-ctx.fillStyle = &apos;red&apos;
-ctx.fillRect(10,10,40,40)
-
-
-用法：
-    1.先获取canvas dom对象canvas
-    2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx
-    3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格，
-    ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点
-    ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> Html5 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> canvas </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[ECMAscipt6 es6第一天]]></title>
-      <url>/2017/07/31/ES601/</url>
-      <content type="html"><![CDATA[<h4 id="1-ECMAsript6-es6"><a href="#1-ECMAsript6-es6" class="headerlink" title="1. ECMAsript6 es6"></a>1. ECMAsript6 es6</h4><ol>
-<li><p>let 和 const 用来声明变量的两个新关键字</p>
-<pre><code>let :   1. 不存在变量提升
-        2.不可以重复声明
-        3.暂时性死区
-        4.在块级作用域之外无法访问
-
-const:  1.和let一样的特点
-        2.用来声明常量，一经赋值，不能更改
-        3.声明时必须同时赋值 否则报错 
-        4.当const 声明的常量为引用数据类型时，指向的其实是地址，所以可以修改地址指向的数据的内容，但是不能重新指向一个新的数据
-        5.根据习惯，我们用const命名的变量都是全部大写如PI,GENDER
-</code></pre></li>
-<li><p>解构赋值：通过模式匹配去取值赋值</p>
-<pre><code>数组的解构赋值：
-    1.对号入座 [a,b,c] = [1,2,3]  a=1 b=2 c=3
-    2.没有就undefined  [a,b,c] = [1]    a=1  b=undefined  c=undefined
-    3.可以设置默认值   [a,b=’b’,c=’c’] = [‘a’]  a=’a’ b=’b’ c=’c’
-对象的解构赋值：
-    1.根据键名匹配
-    2.本质是将匹配到的键名所对应的值赋值给变量，牢记变量的位置
-字符串的解构赋值：
-    1.可以取出一个字符串上的每个字符
-    2.取出字符串的长度
-数值和布尔值的解构赋值：
-    1.会将数值和布尔值转换成包装对象
-函数的解构赋值：
-    1.默认值
-</code></pre></li>
-<li><p>for-of与for-in</p>
-<p> for-of : 遍历键值 （数组，字符串）可以用for-of的是因为这个对象有遍历器接口</p>
-<p> for-in : 遍历键名    （数组，字符串，对象）</p>
-</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> ES6 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> let </tag>
-            
-            <tag> const </tag>
-            
-            <tag> for-of </tag>
-            
-            <tag> for-in </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Javascript高级 第三天]]></title>
-      <url>/2017/07/31/js-senior03/</url>
-      <content type="html"><![CDATA[<h4 id="1-JavaScript面向对象的继承："><a href="#1-JavaScript面向对象的继承：" class="headerlink" title="1. JavaScript面向对象的继承："></a>1. JavaScript面向对象的继承：</h4><ol>
-<li><p>类式继承：将父类的实例赋值给子类的原型</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SubClass.prototype = new SupClass()</div><div class="line">//缺点：子类实例共用父类实例私有属性的引用类型属性部分</div></pre></td></tr></table></figure>
-</li>
-<li><p>构造函数继承：将父类的构造函数在子类的构造函数中执行一遍</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function SubClass()&#123;</div><div class="line">   SuperClass.call(this)</div><div class="line">&#125;</div><div class="line">//缺点：子类实例无法使用父类原型上的扩展方法</div></pre></td></tr></table></figure>
-</li>
-<li><p>组合继承: 将类式继承和构造函数继承结合在一起的继承方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  function SubClass()&#123;</div><div class="line">SuperClass.call(this)</div><div class="line">  &#125;</div><div class="line">  SubClass.prototype = new SuperClass()</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="2-JavaScript的多态："><a href="#2-JavaScript的多态：" class="headerlink" title="2. JavaScript的多态："></a>2. JavaScript的多态：</h4><ol>
-<li>可以通过一些技巧实现多态<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//利用arguments对象来实现js的多态 如果传入一个参数则返回10的n次方 两个参数则返回x的n次方,n为正整数</div><div class="line">function pow(n,x)&#123;</div><div class="line">    var l = arguments.length</div><div class="line">    if(l&gt;2)</div><div class="line">    l = 2</div><div class="line">    function _f(n,x) &#123;</div><div class="line">        if(n&lt;=0)</div><div class="line">        return &apos;n为正整数&apos;</div><div class="line">        if(n==1)</div><div class="line">        return x</div><div class="line">        return x*_f(n-1,x)</div><div class="line">    &#125;</div><div class="line">    switch(l)&#123;</div><div class="line">        case 1:</div><div class="line">        return _f(n,10)</div><div class="line">        case 2:</div><div class="line">        return _f(n,x)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="3-Javascript的模块"><a href="#3-Javascript的模块" class="headerlink" title="3. Javascript的模块:"></a>3. Javascript的模块:</h4><ol>
-<li><p>Common.js规范：nodejs的模块就是根据此规范实现的，针对服务器，这个规范定义了一个require（）的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var $ = require(&apos;jquery&apos;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>AMD规范：实现：require.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Require.js的用法：</div><div class="line">    1.导入原文件</div><div class="line">        (a)使用require([ …],function(…)&#123;</div><div class="line">                ...</div><div class="line">            &#125;)</div><div class="line">        (b)使用define([…],function(…)&#123;</div><div class="line">                ...</div><div class="line">            &#125;)</div><div class="line">    //此方法会定义一个模块</div></pre></td></tr></table></figure>
-</li>
-<li><p>*CMD规范：实现：sea.js</p>
-</li>
-<li>es6的模块</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Javascript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 继承 </tag>
-            
-            <tag> 多态 </tag>
-            
-            <tag> 模板 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Javascript高级 第二天]]></title>
-      <url>/2017/07/28/js-senior02/</url>
-      <content type="html"><![CDATA[<h5 id="1-Javascript中的this"><a href="#1-Javascript中的this" class="headerlink" title="1. Javascript中的this"></a>1. Javascript中的this</h5><ol>
-<li>在全局作用域下this指向window(浏览器环境)或global(服务器环境)(tip:当在严格模式下,this无法指向全局对象)</li>
-<li>对象方法下的this，这时候的this指向调用方法的对象</li>
-<li><p>在实例化一个对象时，this指向新的对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var me = new Human()</div><div class="line">//new 操作符做的事情：</div><div class="line">//1.创建一个空对象，作为返回的对象</div><div class="line">//2.将这个空对象赋值给函数中的this</div><div class="line">//3.在一般情况下，返回该this</div></pre></td></tr></table></figure>
-</li>
-<li><p>call/apply中的this指向第一个参数<br>(这两个方法的作用就是更改函数内this的指向)</p>
-</li>
-<li>bind方法中的this指向第一个参数，可以用bind实现函数的科里化<h5 id="2-arguments对象"><a href="#2-arguments对象" class="headerlink" title="2. arguments对象"></a>2. arguments对象</h5>arguments是一个方法内部的对象，它是所有传入参数的集合，有点像数组但不是数组<h5 id="3-js的面向对象"><a href="#3-js的面向对象" class="headerlink" title="3. js的面向对象"></a>3. js的面向对象</h5></li>
-<li>js是基于原型(prototype)的语言</li>
-<li>一个类的私有属性，私有方法，实例属性，实例方法，静态属性，静态方法</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Javascript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> this </tag>
-            
-            <tag> call/apply </tag>
-            
-            <tag> arguments </tag>
-            
-            <tag> prototype </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Javascript高级 第一天]]></title>
-      <url>/2017/07/28/js-senior01/</url>
-      <content type="html"><![CDATA[<h5 id="1-函数是js中的一等公民"><a href="#1-函数是js中的一等公民" class="headerlink" title="1. 函数是js中的一等公民"></a>1. 函数是js中的一等公民</h5><ol>
-<li>函数可以作为方法，封装一段可以重复使用的代码.</li>
-<li>在js中，函数也是对象，js的面向对象是通过函数实现的.</li>
-<li>在js中，函数可以用来传递数据.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function f(x)&#123;</div><div class="line">    var xx</div><div class="line">    if(!x)&#123;</div><div class="line">        xx = 100</div><div class="line">    &#125;else&#123;</div><div class="line">        xx = x</div><div class="line">    &#125;</div><div class="line">    return  function(n)&#123;</div><div class="line">        console.log(Math.pow(xx,n))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Javascript的作用域是函数级作用域，无块级作用域</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="2-定义一个函数的几种方法"><a href="#2-定义一个函数的几种方法" class="headerlink" title="2.定义一个函数的几种方法"></a>2.定义一个函数的几种方法</h5><ol>
-<li>var f =function(){}</li>
-<li>function f(){}</li>
-<li>new Function()/Function(){}</li>
-<li><p>匿名函数与立即执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;)()      //匿名函数</div><div class="line">!function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;()       //立即执行函数</div></pre></td></tr></table></figure>
-</li>
-<li><p>例子(匿名函数与闭包)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var lunbo = (function()&#123;</div><div class="line">    var page = 11</div><div class="line">    var ctx =1</div><div class="line">    function run()&#123;</div><div class="line">        console.log(&apos;run&apos;)</div><div class="line">    &#125;</div><div class="line">    return&#123;</div><div class="line">        page : page,</div><div class="line">        ctx : ctx,</div><div class="line">        run : run</div><div class="line">    &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="3-变量提升"><a href="#3-变量提升" class="headerlink" title="3.变量提升"></a>3.变量提升</h5><ol>
-<li><p>变量声明，函数声明语句会提前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(str)  //打印出：aaa</div><div class="line">var str = &apos;aaa&apos;</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line"></div><div class="line">var str</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line">str = &apos;bbb&apos;</div><div class="line">console.log(str)  //打印出：bbb</div></pre></td></tr></table></figure>
-</li>
-<li><p>函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略)</p>
-</li>
-<li>js是基于事件机制的的单线程语言<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">同步队列:[line1,line2,line3]</div><div class="line">异步队列:[setTimeout]</div><div class="line">//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利</div><div class="line">function factory(name,attack,defence,health,skill) &#123;</div><div class="line">    this.name = name;</div><div class="line">    this.attack = attack;</div><div class="line">    this.defence = defence;</div><div class="line">    this.health = health;</div><div class="line">    this.skill = skill;</div><div class="line">    var zet  = this ; </div><div class="line">    this.fight = function (target) &#123;</div><div class="line">        var meReduce = target.attack - this.defence</div><div class="line">        var tarReduce = this.attack - target.defence</div><div class="line">        var meBeated = Math.ceil(this.health/meReduce)</div><div class="line">        var tarBeated = Math.ceil(target.health/tarReduce)</div><div class="line">        var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated</div><div class="line">        var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos;</div><div class="line">        var healthM = this.health</div><div class="line">        var healthT = target.health</div><div class="line">        for(var i = 1 ; i&lt;=turns; i++)&#123;</div><div class="line">            healthM -= meReduce</div><div class="line">            healthM = healthM &lt; 0 ? 0 : healthM</div><div class="line">            !function (a,n) &#123;</div><div class="line">                setTimeout(function()&#123;</div><div class="line">                    console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a)							</div><div class="line">                &#125;,1000*n)	</div><div class="line">            &#125;(healthM,i)</div><div class="line">            if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(target.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">                break</div><div class="line">            &#125;</div><div class="line">            healthT -= tarReduce</div><div class="line">            healthT = healthT &lt; 0 ? 0 : healthT</div><div class="line">            !function (b,n) &#123;</div><div class="line">                setTimeout(function () &#123;</div><div class="line">                    console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b)							</div><div class="line">                &#125;,1000*n)									</div><div class="line">            &#125;(healthT,i)</div><div class="line">            if(win == &apos;me&apos; &amp;&amp; i == turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(zet.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);</div><div class="line">var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);</div><div class="line">zilong.fight(xingshi);</div></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Javascript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 定义函数 </tag>
-            
-            <tag> 变量提升 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[Javascript高级 第三天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior03%2F</url>
+    <content type="text"><![CDATA[1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型 12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分 构造函数继承：将父类的构造函数在子类的构造函数中执行一遍 1234function SubClass()&#123; SuperClass.call(this)&#125;//缺点：子类实例无法使用父类原型上的扩展方法 组合继承: 将类式继承和构造函数继承结合在一起的继承方式 1234 function SubClass()&#123;SuperClass.call(this) &#125; SubClass.prototype = new SuperClass() 2. JavaScript的多态： 可以通过一些技巧实现多态12345678910111213141516171819//利用arguments对象来实现js的多态 如果传入一个参数则返回10的n次方 两个参数则返回x的n次方,n为正整数function pow(n,x)&#123; var l = arguments.length if(l&gt;2) l = 2 function _f(n,x) &#123; if(n&lt;=0) return &apos;n为正整数&apos; if(n==1) return x return x*_f(n-1,x) &#125; switch(l)&#123; case 1: return _f(n,10) case 2: return _f(n,x) &#125;&#125; 3. Javascript的模块: Common.js规范：nodejs的模块就是根据此规范实现的，针对服务器，这个规范定义了一个require（）的方法 1var $ = require(&apos;jquery&apos;) AMD规范：实现：require.js 123456789Require.js的用法： 1.导入原文件 (a)使用require([ …],function(…)&#123; ... &#125;) (b)使用define([…],function(…)&#123; ... &#125;) //此方法会定义一个模块 *CMD规范：实现：sea.js es6的模块]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>继承</tag>
+        <tag>多态</tag>
+        <tag>模板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Javascript高级 第四天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior04%2F</url>
+    <content type="text"><![CDATA[1. Js的第七种数据类型 symbol每一个通过symbol生成的数据都是独一无二的，所以不用担心重名的问题以Symbol数据类型为对象键名的时候，无法被for-of或者for-in遍历出来同样也不会被遍历器方法返回（entry() keys()之类的方法）Object.getOwnPropertySymbols( obj )这个方法返回一个数组，里面包含所有symbol属性的键名 *以Symbol类型为键名的键值转字符串会报错 2. Symbol.for()/Symbol.keyfor()每一个通过Symbol（）创建的symbol类型的值都是独一无二的，即便是传入相同的参数或者不传，两个symbol值都是不相等的 而通过Symbol.for()方法创建的symbol值，传入相同的参数名如Symbol.for(‘foo’)，则两次调用返回的symbol值 s1和s2是相等的 本质：在调用Symbol.for的时候，会先去找，如果找到就返回该值，如果找不到，就创建一个新的 3. Js中的异步在es6之前，我们处理异步的方式有如下几种： 回调 事件 Es6提供了 Promise来解决异步问题 12345function * f()&#123; yield … yield … return …&#125; Generator函数在执行的时候并没有真正执行，只是返回了一个遍历器对象 我们可以通过对遍历器对象调用next方法来跑generator函数的内部代码 每调用一次next，对应的generator函数就会从上一次执行的代码结尾处（或函数开头）开始执行，直到遇到下一个yield语句或者return语句，如果遇到yield语句，会将yield语句后面的表达式的值返回，如果遇到return语句，同样会将return后面的表达式的值当成返回值返回，并将返回对象的done置为false Next方法的参数 Yield表达式本身没有返回值，或者说返回值为undefined Next()所传入的参数会被赋值给当前yield表达式的返回值]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>symbol</tag>
+        <tag>Promise</tag>
+        <tag>Generator</tag>
+        <tag>Next</tag>
+        <tag>yield</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Javascript高级 第五天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior05%2F</url>
+    <content type="text"><![CDATA[1. PromisePromise是用来解决异步编程的一个规范，Bluebird的库就实现了promise，随后2015年发布的es2015（es6）就已经实现了promise对象 对象的状态不受外界影响 一个promise会有如下三种状态(只会在这三种状态中取一): pending(进行中) resolved(已完成) rejected(已拒绝) (只有promise内部决议方法可以改变promise的状态) 状态一经更改，不会再变 Promise的状态改变只有两种可能： pending =&gt;resolved pending =&gt;rejected 2. Promise构造函数接收方法Promise.all([ p , p2, p3]) 该方法接收一个promise数组，返回一个大promise 外层大promise的决议结果等于传入promise数组内的所有Promise决议的“与”运算的值1234567891011121314151617181920212223242526272829303132333435363738394041function learnHtmlAndCss() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学习html和css&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;html和css基础我学会啦&apos;) resolve(&apos;get them(html css基础)&apos;) &#125; else &#123; console.log(&apos;学习css和html失败&apos;) reject(&apos;学习css和html失败&apos;) &#125; &#125;,7000) &#125;)&#125;function learnJavascriptBase() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学Javascript基础&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;js基础我学会啦&apos;) resolve(&apos;get them(javascript base)&apos;) &#125; else &#123; console.log(&apos;学习js基础失败&apos;) reject(&apos;学习js基础失败&apos;) &#125; &#125;,3000) &#125;)&#125;function learnFrontEnd(...arr) &#123; return Promise.all(arr)&#125;learnFrontEnd(learnJavascriptBase(),learnHtmlAndCss()).then( function (datas) &#123; console.log(&apos;学业已成&apos;) console.log(datas) &#125;, function (error) &#123; console.log(&apos;失败,请努力&apos;) console.log(&apos;失败原因：&apos;+error) &#125;) Promise.race([p, p2, p3]) 该方法接收一个promise数组，返回一个大promise，外层大promise的决议结果等于传入promise数组内的第一个决议的promise的决议结果1234567891011121314151617181920212223242526272829303132333435363738394041function learnHtmlAndCss() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学习html和css&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;html和css基础我学会啦&apos;) resolve(&apos;get them(html css基础)&apos;) &#125; else &#123; console.log(&apos;学习css和html失败&apos;) reject(&apos;学习css和html失败&apos;) &#125; &#125;,7000) &#125;)&#125;function learnJavascriptBase() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学Javascript基础&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;js基础我学会啦&apos;) resolve(&apos;get them(javascript base)&apos;) &#125; else &#123; console.log(&apos;学习js基础失败&apos;) reject(&apos;学习js基础失败&apos;) &#125; &#125;,3000) &#125;)&#125;function learnSkill(...arr) &#123; return Promise.race(arr)&#125;learnSkill(learnHtmlAndCss(),learnJavascriptBase()).then( function (d) &#123; console.log(d) console.log(&apos;该去学习了&apos;) &#125;, function (e) &#123; console.log(e) console.log(&apos;继续努力&apos;) &#125;) then(f1,f2)方法将会返回一个新的Promise对象，意味着可以链式调用在then方法中f1代表成功回调，f2代表失败回调而在f1和f2中返回值或函数本身运行的状态会影响下一个then方法的抉择而不是抉择f1和f2抉择了下一个then方法的抉择说白了每一个then方法中包含了某个动作 这个动作可能是在成功回调中也可能出现在失败回调中，也可能是独立的两个动作，但是这个then方法只可能走其中一个动作，且这个动作的成功或者失败决定了下一个then方法选择成功回调或者失败回调，而非这个动作出现在上一个then方法的成功回调还是失败回调决定下一个then方法的抉择 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354var p = new Promise(function (resolve,reject) &#123; var r =Math.random() if (r&gt;0.5) &#123; resolve(r) &#125; else &#123; reject(r) &#125;&#125;)p.then(function (data) &#123; console.log(&apos;data:&apos;+data)&#125;,function (err) &#123; console.log(&apos;err:&apos;+err)&#125;)var o = new Promise(function (resolve,reject) &#123; setTimeout(function() &#123; resolve(&apos;promise&apos;) &#125;, 500);&#125;)o.then( function (data) &#123; console.log(&apos;data:&apos;+data) return &apos;second promise&apos; &#125;, function (err) &#123; console.log(&apos;err:&apos;+err) &#125;).then( function (d) &#123; console.log(&apos;d:&apos;+d) &#125;, function (e) &#123; console.log(&apos;e:&apos;+e) &#125;)var getUp = new Promise(function (resolve,reject) &#123; var r = Math.randow() if (r&gt;0.5) &#123; resolve(&apos;起床成功&apos;) &#125; else &#123; reject(&apos;起床失败&apos;) &#125;&#125;)getUp.then( function (d) &#123; console.log(&apos;d:&apos;+d) &#125;, function (e) &#123; console.log(&apos;e:&apos;+e) &#125;)]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
+        <tag>then</tag>
+        <tag>resolve</tag>
+        <tag>reject</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ECMAscipt6 es6第一天]]></title>
+    <url>%2F2017%2F07%2F31%2FES601%2F</url>
+    <content type="text"><![CDATA[1. ECMAsript6 es6 let 和 const 用来声明变量的两个新关键字 let : 1. 不存在变量提升 2.不可以重复声明 3.暂时性死区 4.在块级作用域之外无法访问 const: 1.和let一样的特点 2.用来声明常量，一经赋值，不能更改 3.声明时必须同时赋值 否则报错 4.当const 声明的常量为引用数据类型时，指向的其实是地址，所以可以修改地址指向的数据的内容，但是不能重新指向一个新的数据 5.根据习惯，我们用const命名的变量都是全部大写如PI,GENDER 解构赋值：通过模式匹配去取值赋值 数组的解构赋值： 1.对号入座 [a,b,c] = [1,2,3] a=1 b=2 c=3 2.没有就undefined [a,b,c] = [1] a=1 b=undefined c=undefined 3.可以设置默认值 [a,b=’b’,c=’c’] = [‘a’] a=’a’ b=’b’ c=’c’ 对象的解构赋值： 1.根据键名匹配 2.本质是将匹配到的键名所对应的值赋值给变量，牢记变量的位置 字符串的解构赋值： 1.可以取出一个字符串上的每个字符 2.取出字符串的长度 数值和布尔值的解构赋值： 1.会将数值和布尔值转换成包装对象 函数的解构赋值： 1.默认值 for-of与for-in for-of : 遍历键值 （数组，字符串）可以用for-of的是因为这个对象有遍历器接口 for-in : 遍历键名 （数组，字符串，对象）]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>let</tag>
+        <tag>const</tag>
+        <tag>for-of</tag>
+        <tag>for-in</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ECMAscipt6 es6第二天]]></title>
+    <url>%2F2017%2F07%2F31%2FES602%2F</url>
+    <content type="text"><![CDATA[1. ES6的模块系统Es6的模块系统现在浏览器还玩不了，需要将写有es6模块系统代码的文件重新编译成浏览器可以识别的低版本js才能运行 Es6的模块主要就是两个关键字 export和import Export是导出（暴露）数据，Import是导入数据 Export方法请记住两种用法: export default +数据 （数据可以是所有数据类型） export { } 对象里面是数据 import方法请记住两种用法，分别对应export的两种用法: import 变量名 from 路径,此时 变量名你可以任意去取名 路径是相对路径的字符串,此时该变量名对应的变量获得的就是路径对应模块所export default出来的数据 import { 变量名 } from 路径,此时变量名要想获得数据，则应该和路径对应的模块所 export {。。。。} 内部的变量名对应，只要对应上了，就可以拿到相应的值，这种场景针对你希望获得某个模块的部分功能，而不是加载整个模块]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>Export</tag>
+        <tag>Import</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Canvas]]></title>
+    <url>%2F2017%2F07%2F31%2Fcanvas%2F</url>
+    <content type="text"><![CDATA[Canvas:使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值 //canvas元素必须有一个id document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;) var canvas = document.getElementById(&apos;canvas&apos;) var ctx = canvas.getContext(&apos;2d&apos;) ctx.fillStyle = &apos;red&apos; ctx.fillRect(10,10,40,40) 用法： 1.先获取canvas dom对象canvas 2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx 3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格， ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点 ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高]]></content>
+      <categories>
+        <category>Html5</category>
+      </categories>
+      <tags>
+        <tag>canvas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Javascript高级 第一天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior01%2F</url>
+    <content type="text"><![CDATA[1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&#123; var xx if(!x)&#123; xx = 100 &#125;else&#123; xx = x &#125; return function(n)&#123; console.log(Math.pow(xx,n)) &#125;&#125;//Javascript的作用域是函数级作用域，无块级作用域 2.定义一个函数的几种方法 var f =function(){} function f(){} new Function()/Function(){} 匿名函数与立即执行函数 123456(function()&#123; //...something&#125;)() //匿名函数!function()&#123; //...something&#125;() //立即执行函数 例子(匿名函数与闭包) 123456789101112var lunbo = (function()&#123; var page = 11 var ctx =1 function run()&#123; console.log(&apos;run&apos;) &#125; return&#123; page : page, ctx : ctx, run : run &#125;&#125;)() 3.变量提升 变量声明，函数声明语句会提前 12345678console.log(str) //打印出：aaavar str = &apos;aaa&apos;console.log(str) //打印出：undefinedvar strconsole.log(str) //打印出：undefinedstr = &apos;bbb&apos;console.log(str) //打印出：bbb 函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略) js是基于事件机制的的单线程语言12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455同步队列:[line1,line2,line3]异步队列:[setTimeout]//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利function factory(name,attack,defence,health,skill) &#123; this.name = name; this.attack = attack; this.defence = defence; this.health = health; this.skill = skill; var zet = this ; this.fight = function (target) &#123; var meReduce = target.attack - this.defence var tarReduce = this.attack - target.defence var meBeated = Math.ceil(this.health/meReduce) var tarBeated = Math.ceil(target.health/tarReduce) var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos; var healthM = this.health var healthT = target.health for(var i = 1 ; i&lt;=turns; i++)&#123; healthM -= meReduce healthM = healthM &lt; 0 ? 0 : healthM !function (a,n) &#123; setTimeout(function()&#123; console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a) &#125;,1000*n) &#125;(healthM,i) if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(target.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) break &#125; healthT -= tarReduce healthT = healthT &lt; 0 ? 0 : healthT !function (b,n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b) &#125;,1000*n) &#125;(healthT,i) if(win == &apos;me&apos; &amp;&amp; i == turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) &#125; &#125; &#125;&#125;var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);zilong.fight(xingshi);]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>定义函数</tag>
+        <tag>变量提升</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Javascript高级 第二天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior02%2F</url>
+    <content type="text"><![CDATA[1. Javascript中的this 在全局作用域下this指向window(浏览器环境)或global(服务器环境)(tip:当在严格模式下,this无法指向全局对象) 对象方法下的this，这时候的this指向调用方法的对象 在实例化一个对象时，this指向新的对象 12345var me = new Human()//new 操作符做的事情：//1.创建一个空对象，作为返回的对象//2.将这个空对象赋值给函数中的this//3.在一般情况下，返回该this call/apply中的this指向第一个参数(这两个方法的作用就是更改函数内this的指向) bind方法中的this指向第一个参数，可以用bind实现函数的科里化2. arguments对象arguments是一个方法内部的对象，它是所有传入参数的集合，有点像数组但不是数组3. js的面向对象 js是基于原型(prototype)的语言 一个类的私有属性，私有方法，实例属性，实例方法，静态属性，静态方法]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>this</tag>
+        <tag>call/apply</tag>
+        <tag>arguments</tag>
+        <tag>prototype</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F07%2F30%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
 </search>
