@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="继承,多态,模板," />
 
 
 
@@ -93,17 +93,18 @@
 
 
 
-<meta name="description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
+<meta name="description" content="1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型  12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分  构造函数继承：将父类的构造函数在子类的构造函数中执行一遍  1234function SubClass()&amp;#123;   SuperClass.call(this)&amp;#125;/">
+<meta name="keywords" content="继承,多态,模板">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript高级 第一天">
-<meta property="og:url" content="duchengqing.online/2017/07/28/js01/index.html">
+<meta property="og:title" content="Javascript高级 第三天">
+<meta property="og:url" content="duchengqing.online/2017/07/31/js-senior03/index.html">
 <meta property="og:site_name" content="Duchengqing-Blog">
-<meta property="og:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
+<meta property="og:description" content="1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型  12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分  构造函数继承：将父类的构造函数在子类的构造函数中执行一遍  1234function SubClass()&amp;#123;   SuperClass.call(this)&amp;#125;/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-31T07:30:59.371Z">
+<meta property="og:updated_time" content="2017-07-31T09:41:30.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript高级 第一天">
-<meta name="twitter:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
+<meta name="twitter:title" content="Javascript高级 第三天">
+<meta name="twitter:description" content="1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型  12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分  构造函数继承：将父类的构造函数在子类的构造函数中执行一遍  1234function SubClass()&amp;#123;   SuperClass.call(this)&amp;#125;/">
 
 
 
@@ -131,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="duchengqing.online/2017/07/28/js01/"/>
+  <link rel="canonical" href="duchengqing.online/2017/07/31/js-senior03/"/>
 
 
 
 
 
-  <title>Javascript高级 第一天 | Duchengqing-Blog</title>
+  <title>Javascript高级 第三天 | Duchengqing-Blog</title>
   
 
 
@@ -320,7 +321,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="duchengqing.online/2017/07/28/js01/">
+    <link itemprop="mainEntityOfPage" href="duchengqing.online/2017/07/31/js-senior03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Duchengqing">
@@ -337,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Javascript高级 第一天</h1>
+          <h1 class="post-title" itemprop="name headline">Javascript高级 第三天</h1>
         
 
         <div class="post-meta">
@@ -349,8 +350,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T17:01:40+08:00">
-                2017-07-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T12:47:19+08:00">
+                2017-07-31
               </time>
             
 
@@ -406,31 +407,31 @@
       
 
       
-        <h5 id="1-函数是js中的一等公民"><a href="#1-函数是js中的一等公民" class="headerlink" title="1. 函数是js中的一等公民"></a>1. 函数是js中的一等公民</h5><ol>
-<li>函数可以作为方法，封装一段可以重复使用的代码.</li>
-<li>在js中，函数也是对象，js的面向对象是通过函数实现的.</li>
-<li>在js中，函数可以用来传递数据.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function f(x)&#123;</div><div class="line">    var xx</div><div class="line">    if(!x)&#123;</div><div class="line">        xx = 100</div><div class="line">    &#125;else&#123;</div><div class="line">        xx = x</div><div class="line">    &#125;</div><div class="line">    return  function(n)&#123;</div><div class="line">        console.log(Math.pow(xx,n))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Javascript的作用域是函数级作用域，无块级作用域</div></pre></td></tr></table></figure>
+        <h4 id="1-JavaScript面向对象的继承："><a href="#1-JavaScript面向对象的继承：" class="headerlink" title="1. JavaScript面向对象的继承："></a>1. JavaScript面向对象的继承：</h4><ol>
+<li><p>类式继承：将父类的实例赋值给子类的原型</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SubClass.prototype = new SupClass()</div><div class="line">//缺点：子类实例共用父类实例私有属性的引用类型属性部分</div></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数继承：将父类的构造函数在子类的构造函数中执行一遍</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function SubClass()&#123;</div><div class="line">   SuperClass.call(this)</div><div class="line">&#125;</div><div class="line">//缺点：子类实例无法使用父类原型上的扩展方法</div></pre></td></tr></table></figure>
+</li>
+<li><p>组合继承: 将类式继承和构造函数继承结合在一起的继承方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  function SubClass()&#123;</div><div class="line">SuperClass.call(this)</div><div class="line">  &#125;</div><div class="line">  SubClass.prototype = new SuperClass()</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h5 id="2-定义一个函数的几种方法"><a href="#2-定义一个函数的几种方法" class="headerlink" title="2.定义一个函数的几种方法"></a>2.定义一个函数的几种方法</h5><ol>
-<li>var f =function(){}</li>
-<li>function f(){}</li>
-<li>new Function()/Function(){}</li>
-<li><p>匿名函数与立即执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;)()      //匿名函数</div><div class="line">!function()&#123;</div><div class="line">    //...something</div><div class="line">&#125;()       //立即执行函数</div></pre></td></tr></table></figure>
-</li>
-<li><p>例子(匿名函数与闭包)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var lunbo = (function()&#123;</div><div class="line">    var page = 11</div><div class="line">    var ctx =1</div><div class="line">    function run()&#123;</div><div class="line">        console.log(&apos;run&apos;)</div><div class="line">    &#125;</div><div class="line">    return&#123;</div><div class="line">        page : page,</div><div class="line">        ctx : ctx,</div><div class="line">        run : run</div><div class="line">    &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<h4 id="2-JavaScript的多态："><a href="#2-JavaScript的多态：" class="headerlink" title="2. JavaScript的多态："></a>2. JavaScript的多态：</h4><ol>
+<li>可以通过一些技巧实现多态<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//利用arguments对象来实现js的多态 如果传入一个参数则返回10的n次方 两个参数则返回x的n次方,n为正整数</div><div class="line">function pow(n,x)&#123;</div><div class="line">    var l = arguments.length</div><div class="line">    if(l&gt;2)</div><div class="line">    l = 2</div><div class="line">    function _f(n,x) &#123;</div><div class="line">        if(n&lt;=0)</div><div class="line">        return &apos;n为正整数&apos;</div><div class="line">        if(n==1)</div><div class="line">        return x</div><div class="line">        return x*_f(n-1,x)</div><div class="line">    &#125;</div><div class="line">    switch(l)&#123;</div><div class="line">        case 1:</div><div class="line">        return _f(n,10)</div><div class="line">        case 2:</div><div class="line">        return _f(n,x)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h5 id="3-变量提升"><a href="#3-变量提升" class="headerlink" title="3.变量提升"></a>3.变量提升</h5><ol>
-<li><p>变量声明，函数声明语句会提前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(str)  //打印出：aaa</div><div class="line">var str = &apos;aaa&apos;</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line"></div><div class="line">var str</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line">str = &apos;bbb&apos;</div><div class="line">console.log(str)  //打印出：bbb</div></pre></td></tr></table></figure>
+<h4 id="3-Javascript的模块"><a href="#3-Javascript的模块" class="headerlink" title="3. Javascript的模块:"></a>3. Javascript的模块:</h4><ol>
+<li><p>Common.js规范：nodejs的模块就是根据此规范实现的，针对服务器，这个规范定义了一个require（）的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var $ = require(&apos;jquery&apos;)</div></pre></td></tr></table></figure>
 </li>
-<li><p>函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略)</p>
+<li><p>AMD规范：实现：require.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Require.js的用法：</div><div class="line">    1.导入原文件</div><div class="line">        (a)使用require([ …],function(…)&#123;</div><div class="line">                ...</div><div class="line">            &#125;)</div><div class="line">        (b)使用define([…],function(…)&#123;</div><div class="line">                ...</div><div class="line">            &#125;)</div><div class="line">    //此方法会定义一个模块</div></pre></td></tr></table></figure>
 </li>
-<li>js是基于事件机制的的单线程语言<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">同步队列:[line1,line2,line3]</div><div class="line">异步队列:[setTimeout]</div><div class="line">//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利</div><div class="line">function factory(name,attack,defence,health,skill) &#123;</div><div class="line">    this.name = name;</div><div class="line">    this.attack = attack;</div><div class="line">    this.defence = defence;</div><div class="line">    this.health = health;</div><div class="line">    this.skill = skill;</div><div class="line">    var zet  = this ; </div><div class="line">    this.fight = function (target) &#123;</div><div class="line">        var meReduce = target.attack - this.defence</div><div class="line">        var tarReduce = this.attack - target.defence</div><div class="line">        var meBeated = Math.ceil(this.health/meReduce)</div><div class="line">        var tarBeated = Math.ceil(target.health/tarReduce)</div><div class="line">        var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated</div><div class="line">        var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos;</div><div class="line">        var healthM = this.health</div><div class="line">        var healthT = target.health</div><div class="line">        for(var i = 1 ; i&lt;=turns; i++)&#123;</div><div class="line">            healthM -= meReduce</div><div class="line">            healthM = healthM &lt; 0 ? 0 : healthM</div><div class="line">            !function (a,n) &#123;</div><div class="line">                setTimeout(function()&#123;</div><div class="line">                    console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a)							</div><div class="line">                &#125;,1000*n)	</div><div class="line">            &#125;(healthM,i)</div><div class="line">            if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(target.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">                break</div><div class="line">            &#125;</div><div class="line">            healthT -= tarReduce</div><div class="line">            healthT = healthT &lt; 0 ? 0 : healthT</div><div class="line">            !function (b,n) &#123;</div><div class="line">                setTimeout(function () &#123;</div><div class="line">                    console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b)							</div><div class="line">                &#125;,1000*n)									</div><div class="line">            &#125;(healthT,i)</div><div class="line">            if(win == &apos;me&apos; &amp;&amp; i == turns)&#123;</div><div class="line">                !function (n) &#123;</div><div class="line">                    setTimeout(function () &#123;</div><div class="line">                        console.log(zet.name+&apos;赢了！&apos;)									</div><div class="line">                    &#125;,1000*n)</div><div class="line">                &#125;(i)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);</div><div class="line">var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);</div><div class="line">zilong.fight(xingshi);</div></pre></td></tr></table></figure>
+<li><p>*CMD规范：实现：sea.js</p>
 </li>
+<li>es6的模块</li>
 </ol>
 
       
@@ -459,6 +460,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/继承/" rel="tag"># 继承</a>
+          
+            <a href="/tags/多态/" rel="tag"># 多态</a>
+          
+            <a href="/tags/模板/" rel="tag"># 模板</a>
+          
+        </div>
+      
 
       
       
@@ -468,14 +479,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/07/28/js-senior02/" rel="next" title="Javascript高级 第二天">
+                <i class="fa fa-chevron-left"></i> Javascript高级 第二天
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/28/js02/" rel="prev" title="Javascript高级 第二天">
-                Javascript高级 第二天 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/31/ES601/" rel="prev" title="ECMAscipt6 es6第一天">
+                ECMAscipt6 es6第一天 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -549,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -560,7 +575,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -571,7 +586,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -628,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-函数是js中的一等公民"><span class="nav-number">1.</span> <span class="nav-text">1. 函数是js中的一等公民</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-定义一个函数的几种方法"><span class="nav-number">2.</span> <span class="nav-text">2.定义一个函数的几种方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-变量提升"><span class="nav-number">3.</span> <span class="nav-text">3.变量提升</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JavaScript面向对象的继承："><span class="nav-number">1.</span> <span class="nav-text">1. JavaScript面向对象的继承：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JavaScript的多态："><span class="nav-number">2.</span> <span class="nav-text">2. JavaScript的多态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Javascript的模块"><span class="nav-number">3.</span> <span class="nav-text">3. Javascript的模块:</span></a></li></ol></div>
             
 
           </div>
