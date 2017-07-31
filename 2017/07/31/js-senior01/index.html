@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="Duchengqing-Blog">
 <meta property="og:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-31T09:40:32.000Z">
+<meta property="og:updated_time" content="2017-07-31T13:54:56.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript高级 第一天">
 <meta name="twitter:description" content="1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&amp;#123;    var xx    if(!x)&amp;#123;        xx = 100    &amp;#125;else&amp;#123;        xx = x    &amp;#">
@@ -407,13 +407,13 @@
       
 
       
-        <h5 id="1-函数是js中的一等公民"><a href="#1-函数是js中的一等公民" class="headerlink" title="1. 函数是js中的一等公民"></a>1. 函数是js中的一等公民</h5><ol>
+        <h4 id="1-函数是js中的一等公民"><a href="#1-函数是js中的一等公民" class="headerlink" title="1. 函数是js中的一等公民"></a>1. 函数是js中的一等公民</h4><ol>
 <li>函数可以作为方法，封装一段可以重复使用的代码.</li>
 <li>在js中，函数也是对象，js的面向对象是通过函数实现的.</li>
 <li>在js中，函数可以用来传递数据.<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function f(x)&#123;</div><div class="line">    var xx</div><div class="line">    if(!x)&#123;</div><div class="line">        xx = 100</div><div class="line">    &#125;else&#123;</div><div class="line">        xx = x</div><div class="line">    &#125;</div><div class="line">    return  function(n)&#123;</div><div class="line">        console.log(Math.pow(xx,n))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Javascript的作用域是函数级作用域，无块级作用域</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h5 id="2-定义一个函数的几种方法"><a href="#2-定义一个函数的几种方法" class="headerlink" title="2.定义一个函数的几种方法"></a>2.定义一个函数的几种方法</h5><ol>
+<h4 id="2-定义一个函数的几种方法"><a href="#2-定义一个函数的几种方法" class="headerlink" title="2.定义一个函数的几种方法"></a>2.定义一个函数的几种方法</h4><ol>
 <li>var f =function(){}</li>
 <li>function f(){}</li>
 <li>new Function()/Function(){}</li>
@@ -424,7 +424,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var lunbo = (function()&#123;</div><div class="line">    var page = 11</div><div class="line">    var ctx =1</div><div class="line">    function run()&#123;</div><div class="line">        console.log(&apos;run&apos;)</div><div class="line">    &#125;</div><div class="line">    return&#123;</div><div class="line">        page : page,</div><div class="line">        ctx : ctx,</div><div class="line">        run : run</div><div class="line">    &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h5 id="3-变量提升"><a href="#3-变量提升" class="headerlink" title="3.变量提升"></a>3.变量提升</h5><ol>
+<h4 id="3-变量提升"><a href="#3-变量提升" class="headerlink" title="3.变量提升"></a>3.变量提升</h4><ol>
 <li><p>变量声明，函数声明语句会提前</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">console.log(str)  //打印出：aaa</div><div class="line">var str = &apos;aaa&apos;</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line"></div><div class="line">var str</div><div class="line">console.log(str)  //打印出：undefined</div><div class="line">str = &apos;bbb&apos;</div><div class="line">console.log(str)  //打印出：bbb</div></pre></td></tr></table></figure>
 </li>
@@ -562,7 +562,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -573,7 +573,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -584,7 +584,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -641,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-函数是js中的一等公民"><span class="nav-number">1.</span> <span class="nav-text">1. 函数是js中的一等公民</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-定义一个函数的几种方法"><span class="nav-number">2.</span> <span class="nav-text">2.定义一个函数的几种方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-变量提升"><span class="nav-number">3.</span> <span class="nav-text">3.变量提升</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-函数是js中的一等公民"><span class="nav-number">1.</span> <span class="nav-text">1. 函数是js中的一等公民</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-定义一个函数的几种方法"><span class="nav-number">2.</span> <span class="nav-text">2.定义一个函数的几种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-变量提升"><span class="nav-number">3.</span> <span class="nav-text">3.变量提升</span></a></li></ol></div>
             
 
           </div>
