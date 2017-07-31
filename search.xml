@@ -4,6 +4,9 @@
     <title><![CDATA[Javascript高级 第三天]]></title>
     <url>%2F2017%2F07%2F31%2Fjs03%2F</url>
     <content type="text"><![CDATA[1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[Javascript高级 第二天]]></title>
@@ -23,5 +26,8 @@
     <title><![CDATA[Javascript高级 第一天]]></title>
     <url>%2F2017%2F07%2F28%2Fjs01%2F</url>
     <content type="text"><![CDATA[1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&#123; var xx if(!x)&#123; xx = 100 &#125;else&#123; xx = x &#125; return function(n)&#123; console.log(Math.pow(xx,n)) &#125;&#125;//Javascript的作用域是函数级作用域，无块级作用域 2.定义一个函数的几种方法 var f =function(){} function f(){} new Function()/Function(){} 匿名函数与立即执行函数 123456(function()&#123; //...something&#125;)() //匿名函数!function()&#123; //...something&#125;() //立即执行函数 例子(匿名函数与闭包) 123456789101112var lunbo = (function()&#123; var page = 11 var ctx =1 function run()&#123; console.log(&apos;run&apos;) &#125; return&#123; page : page, ctx : ctx, run : run &#125;&#125;)() 3.变量提升 变量声明，函数声明语句会提前 12345678console.log(str) //打印出：aaavar str = &apos;aaa&apos;console.log(str) //打印出：undefinedvar strconsole.log(str) //打印出：undefinedstr = &apos;bbb&apos;console.log(str) //打印出：bbb 函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略) js是基于事件机制的的单线程语言12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455同步队列:[line1,line2,line3]异步队列:[setTimeout]//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利function factory(name,attack,defence,health,skill) &#123; this.name = name; this.attack = attack; this.defence = defence; this.health = health; this.skill = skill; var zet = this ; this.fight = function (target) &#123; var meReduce = target.attack - this.defence var tarReduce = this.attack - target.defence var meBeated = Math.ceil(this.health/meReduce) var tarBeated = Math.ceil(target.health/tarReduce) var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos; var healthM = this.health var healthT = target.health for(var i = 1 ; i&lt;=turns; i++)&#123; healthM -= meReduce healthM = healthM &lt; 0 ? 0 : healthM !function (a,n) &#123; setTimeout(function()&#123; console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a) &#125;,1000*n) &#125;(healthM,i) if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(target.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) break &#125; healthT -= tarReduce healthT = healthT &lt; 0 ? 0 : healthT !function (b,n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b) &#125;,1000*n) &#125;(healthT,i) if(win == &apos;me&apos; &amp;&amp; i == turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) &#125; &#125; &#125;&#125;var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);zilong.fight(xingshi);]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
   </entry>
 </search>
