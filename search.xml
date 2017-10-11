@@ -89,17 +89,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Javascript高级 第二天]]></title>
-    <url>%2F2017%2F07%2F31%2Fjs-senior02%2F</url>
-    <content type="text"><![CDATA[1. Javascript中的this 在全局作用域下this指向window(浏览器环境)或global(服务器环境)(tip:当在严格模式下,this无法指向全局对象) 对象方法下的this，这时候的this指向调用方法的对象 在实例化一个对象时，this指向新的对象 12345var me = new Human()//new 操作符做的事情：//1.创建一个空对象，作为返回的对象//2.将这个空对象赋值给函数中的this//3.在一般情况下，返回该this call/apply中的this指向第一个参数(这两个方法的作用就是更改函数内this的指向) bind方法中的this指向第一个参数，可以用bind实现函数的科里化2. arguments对象arguments是一个方法内部的对象，它是所有传入参数的集合，有点像数组但不是数组3. js的面向对象 js是基于原型(prototype)的语言 一个类的私有属性，私有方法，实例属性，实例方法，静态属性，静态方法]]></content>
+    <title><![CDATA[Canvas]]></title>
+    <url>%2F2017%2F07%2F31%2Fcanvas%2F</url>
+    <content type="text"><![CDATA[Canvas:使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值 //canvas元素必须有一个id document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;) var canvas = document.getElementById(&apos;canvas&apos;) var ctx = canvas.getContext(&apos;2d&apos;) ctx.fillStyle = &apos;red&apos; ctx.fillRect(10,10,40,40) 用法： 1.先获取canvas dom对象canvas 2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx 3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格， ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点 ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高]]></content>
       <categories>
-        <category>Javascript</category>
+        <category>Html5</category>
       </categories>
       <tags>
-        <tag>this</tag>
-        <tag>call/apply</tag>
-        <tag>arguments</tag>
-        <tag>prototype</tag>
+        <tag>canvas</tag>
       </tags>
   </entry>
   <entry>
@@ -115,28 +112,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[ECMAscipt6 es6第一天]]></title>
-    <url>%2F2017%2F07%2F31%2FES601%2F</url>
-    <content type="text"><![CDATA[1. ECMAsript6 es6 let 和 const 用来声明变量的两个新关键字 let : 1. 不存在变量提升 2.不可以重复声明 3.暂时性死区 4.在块级作用域之外无法访问 const: 1.和let一样的特点 2.用来声明常量，一经赋值，不能更改 3.声明时必须同时赋值 否则报错 4.当const 声明的常量为引用数据类型时，指向的其实是地址，所以可以修改地址指向的数据的内容，但是不能重新指向一个新的数据 5.根据习惯，我们用const命名的变量都是全部大写如PI,GENDER 解构赋值：通过模式匹配去取值赋值 数组的解构赋值： 1.对号入座 [a,b,c] = [1,2,3] a=1 b=2 c=3 2.没有就undefined [a,b,c] = [1] a=1 b=undefined c=undefined 3.可以设置默认值 [a,b=’b’,c=’c’] = [‘a’] a=’a’ b=’b’ c=’c’ 对象的解构赋值： 1.根据键名匹配 2.本质是将匹配到的键名所对应的值赋值给变量，牢记变量的位置 字符串的解构赋值： 1.可以取出一个字符串上的每个字符 2.取出字符串的长度 数值和布尔值的解构赋值： 1.会将数值和布尔值转换成包装对象 函数的解构赋值： 1.默认值 for-of与for-in for-of : 遍历键值 （数组，字符串）可以用for-of的是因为这个对象有遍历器接口 for-in : 遍历键名 （数组，字符串，对象）]]></content>
+    <title><![CDATA[Javascript高级 第二天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior02%2F</url>
+    <content type="text"><![CDATA[1. Javascript中的this 在全局作用域下this指向window(浏览器环境)或global(服务器环境)(tip:当在严格模式下,this无法指向全局对象) 对象方法下的this，这时候的this指向调用方法的对象 在实例化一个对象时，this指向新的对象 12345var me = new Human()//new 操作符做的事情：//1.创建一个空对象，作为返回的对象//2.将这个空对象赋值给函数中的this//3.在一般情况下，返回该this call/apply中的this指向第一个参数(这两个方法的作用就是更改函数内this的指向) bind方法中的this指向第一个参数，可以用bind实现函数的科里化2. arguments对象arguments是一个方法内部的对象，它是所有传入参数的集合，有点像数组但不是数组3. js的面向对象 js是基于原型(prototype)的语言 一个类的私有属性，私有方法，实例属性，实例方法，静态属性，静态方法]]></content>
       <categories>
-        <category>ES6</category>
+        <category>Javascript</category>
       </categories>
       <tags>
-        <tag>let</tag>
-        <tag>const</tag>
-        <tag>for-of</tag>
-        <tag>for-in</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Canvas]]></title>
-    <url>%2F2017%2F07%2F31%2Fcanvas%2F</url>
-    <content type="text"><![CDATA[Canvas:使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值 //canvas元素必须有一个id document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;) var canvas = document.getElementById(&apos;canvas&apos;) var ctx = canvas.getContext(&apos;2d&apos;) ctx.fillStyle = &apos;red&apos; ctx.fillRect(10,10,40,40) 用法： 1.先获取canvas dom对象canvas 2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx 3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格， ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点 ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高]]></content>
-      <categories>
-        <category>Html5</category>
-      </categories>
-      <tags>
-        <tag>canvas</tag>
+        <tag>this</tag>
+        <tag>call/apply</tag>
+        <tag>arguments</tag>
+        <tag>prototype</tag>
       </tags>
   </entry>
   <entry>
@@ -149,6 +135,20 @@
       <tags>
         <tag>Export</tag>
         <tag>Import</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ECMAscipt6 es6第一天]]></title>
+    <url>%2F2017%2F07%2F31%2FES601%2F</url>
+    <content type="text"><![CDATA[1. ECMAsript6 es6 let 和 const 用来声明变量的两个新关键字 let : 1. 不存在变量提升 2.不可以重复声明 3.暂时性死区 4.在块级作用域之外无法访问 const: 1.和let一样的特点 2.用来声明常量，一经赋值，不能更改 3.声明时必须同时赋值 否则报错 4.当const 声明的常量为引用数据类型时，指向的其实是地址，所以可以修改地址指向的数据的内容，但是不能重新指向一个新的数据 5.根据习惯，我们用const命名的变量都是全部大写如PI,GENDER 解构赋值：通过模式匹配去取值赋值 数组的解构赋值： 1.对号入座 [a,b,c] = [1,2,3] a=1 b=2 c=3 2.没有就undefined [a,b,c] = [1] a=1 b=undefined c=undefined 3.可以设置默认值 [a,b=’b’,c=’c’] = [‘a’] a=’a’ b=’b’ c=’c’ 对象的解构赋值： 1.根据键名匹配 2.本质是将匹配到的键名所对应的值赋值给变量，牢记变量的位置 字符串的解构赋值： 1.可以取出一个字符串上的每个字符 2.取出字符串的长度 数值和布尔值的解构赋值： 1.会将数值和布尔值转换成包装对象 函数的解构赋值： 1.默认值 for-of与for-in for-of : 遍历键值 （数组，字符串）可以用for-of的是因为这个对象有遍历器接口 for-in : 遍历键名 （数组，字符串，对象）]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>let</tag>
+        <tag>const</tag>
+        <tag>for-of</tag>
+        <tag>for-in</tag>
       </tags>
   </entry>
 </search>
