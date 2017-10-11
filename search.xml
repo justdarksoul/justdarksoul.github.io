@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[setTimeout的一些小秘密]]></title>
+    <url>%2F2017%2F10%2F11%2FsetTimeout%2F</url>
+    <content type="text"><![CDATA[setTimeout的原理先来看一段代码123456var start = new Date();var end = 0 ;setTimeout(function()&#123; console.log(new Date()-start)&#125;,500)while(new Date()-start &lt;= 1000)&#123;&#125; 在上面的代码中，定义了一个setTimeout定时器，延迟的时间是500毫秒。 可能我们会觉得，打印出来的结果是：500. 实际的结果其实是大于1000毫秒的，这是为什么呢？？？ 究其原因，是因为javascript是单线程执行的，在任何时间点，有且只有一个线程在运行javascript程序，无法同一时候运行多段代码。 浏览器下的javascript：浏览器的内核是多线程的，它们在内核控制下相互配合以保持同步，一个浏览器至少实现三个常驻线程–javascript引擎线程-GUI渲染线程-浏览器事件出发线程。 1.JavaScript引擎是基于事件驱动单线程执行的，JavaScript引擎一直等待着任务队列中任务的到来，然后加以处理，浏览器无论什么时候都只有一个JavaScript线程在运行JavaScript程序。 2.GUI渲染线程负责渲染浏览器界面，当界面需要重绘（Repaint）或由于某种操作引发回流(Reflow)时，该线程就会执行。但需要注意，GUI渲染线程与JavaScript引擎是互斥的，当JavaScript引擎执行时GUI线程会被挂起，GUI更新会被保存在一个队列中等到JavaScript引擎空闲时立即被执行。 3.事件触发线程，当一个事件被触发时，该线程会把事件添加到待处理队列的队尾，等待JavaScript引擎的处理。这些事件可来自JavaScript引擎当前执行的代码块如setTimeout、也可来自浏览器内核的其他线程如鼠标点击、Ajax异步请求等，但由于JavaScript的单线程关系，所有这些事件都得排队等待JavaScript引擎处理（当线程中没有执行任何同步代码的前提下才会执行异步代码）。 现在可以再回顾一下之前的那个例子123456var start = new Date();var end = 0 ;setTimeout(function()&#123; console.log(new Date()-start)&#125;,500)while(new Date()-start &lt;= 1000)&#123;&#125; 很简单，虽然setTimeout的延时时间是500毫秒，但是由于下面有while的循环的存在，只有当间隔时间大于1000毫秒时，才会跳出while循环，所以说，在1000毫秒之前，while循环都占据着javascript线程，只有等待跳出while循环，线程才会空闲下来，才会去执行上面定义的setTimeout。 我们可以总结出：setTimeout只能保证在指定的时间后将任务插入任务队列中，但是不保证这个任务在什么时候执行，一旦javascript的线程空闲出来，自行从队列中取出任务然后执行。 因为javascript线程并没有因为什么耗时操作而阻塞，所以可以很快的取出排队队列中的任务然后执行它，也是这种队列机制，给我们造成了一个异步执行的假象。 setTimeout的好搭档 “0”123setTimeout(function()&#123; //statement&#125;，0) 上面的代码表示立即执行。 本意是立刻执行调用函数，但事实上，上面的代码并不是立即执行的，这是因为setTimeout有一个最小执行时间，当指定的时间小于该时间时，浏览器会用最小允许的时间作为setTimeout的时间间隔，也就是说即使我们把setTimeout的延迟时间设置为0，被调用的程序也没有马上启动。 所以说，当我们写为 setTimeout(fn,0) 的时候，实际是实现插队操作，要求浏览器“尽可能快”的进行回调，但是实际能多快就完全取决于浏览器了。 那setTimeout(fn, 0)有什么用处呢？其实用处就在于我们可以改变任务的执行顺序！因为浏览器会在执行完当前任务队列中的任务，再执行setTimeout队列中积累的的任务。 通过设置任务在延迟到0s后执行，就能改变任务执行的先后顺序，延迟该任务发生，使之异步执行。 setTimeout中回调函数的this由于setTimeout() 方法是浏览器 window 对象提供的，因此第一个参数函数中的this其实是指向window对象，这跟变量的作用域有关。 12345678910var a = 1; var obj = &#123; a: 2, test: function() &#123; setTimeout(function()&#123; console.log(this.a); &#125;, 0); &#125; &#125;; obj.test(); // 1 不过我们可以通过使用bind()方法来改变setTimeout回调函数里的this12345678910var a = 1; var obj = &#123; a: 2, test: function() &#123; setTimeout(function()&#123; console.log(this.a); &#125;.bind(this), 0); &#125; &#125;; obj.test(); // 2 setTimeout不止两个参数setTimeout的第一个参数是要执行的回调函数，第二个参数是延迟时间（如果省略，会由浏览器自动设置。在IE，FireFox中，第一次配可能给个很大的数字，100ms上下，往后会缩小到最小时间间隔，Safari，chrome，opera则多为10ms上下。） 其实，setTimeout可以传入第三个参数、第四个参数….，它们表示神马呢？其实是用来表示第一个参数（回调函数）传入的参数。12345setTimeout(function(a, b)&#123; console.log(a); // 3 console.log(b); // 4&#125;,0, 3, 4);]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Css布局：各种居中]]></title>
     <url>%2F2017%2F08%2F24%2FCss%2F</url>
-    <content type="text"><![CDATA[1. 把margin设为auto就是把要居中的元素的margin-left和margin-right都设为auto，这个方法只能进行水平的居中，而且对浮动元素和绝对定位元素没有效果 2. 使用text-align：center只能对图片、按钮、文字等行内元素进行水平居中（在IE6、7这2个浏览器中，它是能对任何元素进行水平居中的） 3. 使用line-height让单行的文字垂直居中把文字的line-height设为文字父容器的高度，只适用于只有一行文字的情况 4. 使用表格使用的是表格，只要用td元素的align=“center”以及valign=“middle”这两个属性就可以了。 如果想在css中控制表格内容居中，垂直居中要用vertical-align：middle 5. 使用display：table-cell居中对于不是表格的元素，可以用display：table-cell把它模拟成一个表格单元格，就可以用表格方便的居中特性了。 6. 使用绝对定位绝对定位只能用于我们已经知道宽或高的元素。 绝对定位进行居中的原理是通过把这个绝对定位元素的left或top的属性设为50%，这时候元素并不是居中的，而是比居中的位置向右或向左偏了这个元素宽度或高度的一半的距离，所以要用一个负的margin-left或margin-top的值来把它拉回到居中的位置，这个负的margin的值就取元素的宽度或高度的一半就可以了。 7. 使用浮动配合相对定位这个方法是关于浮动元素怎么水平居中的解决方法，而且我们不需要知道居中的元素的宽度。 浮动居中的原理是：把浮动元素相对定位到父元素宽度50%的地方，但是这个时候元素不是居中的，而是比居中的位置多出了一个自身一半的宽度，这个时候就需要它里面的子元素再用一个相对定位，把那多出的自身一半的宽度拉回来，而因为相对定位正是相对于自身来定位的，所以自身一半的宽度只要把left或right设为50%就可以得到了，而且不用知道自身的实际宽度是多少。 这种使用浮动配合相对定位居中的方法，优点是不用知道居中的元素的宽度，即使这个宽度是不断变化的也行，缺点是需要一个多余的元素来包裹要居中的元素。 8. 利用font-size来垂直居中如果父元素高度是已知的，要把它里面的子元素进行水平垂直居中，可以使用这个方法，并且子元素的宽度或高度都不必知道。 该方法的要点是给父元素设一个合适的font-size的值，这个值的取值为该父元素的高度除以1.14得到的值，并且子元素必须是一个inline或inline-block元素，需要加上vertical-align：middle属性。 你只需要记得1.14这个数就可以了。 另外，如果vertical-align：middle是写在父元素中而不是子元素中，这样也是可以的，只不过计算font-size时使用的1.14这个数值就要变成大约1.5这个值。]]></content>
+    <content type="text"><![CDATA[把margin设为auto就是把要居中的元素的margin-left和margin-right都设为auto，这个方法只能进行水平的居中，而且对浮动元素和绝对定位元素没有效果 使用text-align：center只能对图片、按钮、文字等行内元素进行水平居中（在IE6、7这2个浏览器中，它是能对任何元素进行水平居中的） 使用line-height让单行的文字垂直居中把文字的line-height设为文字父容器的高度，只适用于只有一行文字的情况 使用表格使用的是表格，只要用td元素的align=“center”以及valign=“middle”这两个属性就可以了。 如果想在css中控制表格内容居中，垂直居中要用vertical-align：middle 使用display：table-cell居中对于不是表格的元素，可以用display：table-cell把它模拟成一个表格单元格，就可以用表格方便的居中特性了。 使用绝对定位绝对定位只能用于我们已经知道宽或高的元素。 绝对定位进行居中的原理是通过把这个绝对定位元素的left或top的属性设为50%，这时候元素并不是居中的，而是比居中的位置向右或向左偏了这个元素宽度或高度的一半的距离，所以要用一个负的margin-left或margin-top的值来把它拉回到居中的位置，这个负的margin的值就取元素的宽度或高度的一半就可以了。 使用浮动配合相对定位这个方法是关于浮动元素怎么水平居中的解决方法，而且我们不需要知道居中的元素的宽度。 浮动居中的原理是：把浮动元素相对定位到父元素宽度50%的地方，但是这个时候元素不是居中的，而是比居中的位置多出了一个自身一半的宽度，这个时候就需要它里面的子元素再用一个相对定位，把那多出的自身一半的宽度拉回来，而因为相对定位正是相对于自身来定位的，所以自身一半的宽度只要把left或right设为50%就可以得到了，而且不用知道自身的实际宽度是多少。 这种使用浮动配合相对定位居中的方法，优点是不用知道居中的元素的宽度，即使这个宽度是不断变化的也行，缺点是需要一个多余的元素来包裹要居中的元素。 利用font-size来垂直居中如果父元素高度是已知的，要把它里面的子元素进行水平垂直居中，可以使用这个方法，并且子元素的宽度或高度都不必知道。 该方法的要点是给父元素设一个合适的font-size的值，这个值的取值为该父元素的高度除以1.14得到的值，并且子元素必须是一个inline或inline-block元素，需要加上vertical-align：middle属性。 你只需要记得1.14这个数就可以了。 另外，如果vertical-align：middle是写在父元素中而不是子元素中，这样也是可以的，只不过计算font-size时使用的1.14这个数值就要变成大约1.5这个值。]]></content>
       <categories>
         <category>Css</category>
       </categories>
@@ -39,34 +47,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Javascript高级 第三天]]></title>
-    <url>%2F2017%2F07%2F31%2Fjs-senior03%2F</url>
-    <content type="text"><![CDATA[1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型 12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分 构造函数继承：将父类的构造函数在子类的构造函数中执行一遍 1234function SubClass()&#123; SuperClass.call(this)&#125;//缺点：子类实例无法使用父类原型上的扩展方法 组合继承: 将类式继承和构造函数继承结合在一起的继承方式 1234 function SubClass()&#123;SuperClass.call(this) &#125; SubClass.prototype = new SuperClass() 2. JavaScript的多态： 可以通过一些技巧实现多态12345678910111213141516171819//利用arguments对象来实现js的多态 如果传入一个参数则返回10的n次方 两个参数则返回x的n次方,n为正整数function pow(n,x)&#123; var l = arguments.length if(l&gt;2) l = 2 function _f(n,x) &#123; if(n&lt;=0) return &apos;n为正整数&apos; if(n==1) return x return x*_f(n-1,x) &#125; switch(l)&#123; case 1: return _f(n,10) case 2: return _f(n,x) &#125;&#125; 3. Javascript的模块: Common.js规范：nodejs的模块就是根据此规范实现的，针对服务器，这个规范定义了一个require（）的方法 1var $ = require(&apos;jquery&apos;) AMD规范：实现：require.js 123456789Require.js的用法： 1.导入原文件 (a)使用require([ …],function(…)&#123; ... &#125;) (b)使用define([…],function(…)&#123; ... &#125;) //此方法会定义一个模块 *CMD规范：实现：sea.js es6的模块]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>继承</tag>
-        <tag>多态</tag>
-        <tag>模板</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Javascript高级 第四天]]></title>
-    <url>%2F2017%2F07%2F31%2Fjs-senior04%2F</url>
-    <content type="text"><![CDATA[1. Js的第七种数据类型 symbol每一个通过symbol生成的数据都是独一无二的，所以不用担心重名的问题以Symbol数据类型为对象键名的时候，无法被for-of或者for-in遍历出来同样也不会被遍历器方法返回（entry() keys()之类的方法）Object.getOwnPropertySymbols( obj )这个方法返回一个数组，里面包含所有symbol属性的键名 *以Symbol类型为键名的键值转字符串会报错 2. Symbol.for()/Symbol.keyfor()每一个通过Symbol（）创建的symbol类型的值都是独一无二的，即便是传入相同的参数或者不传，两个symbol值都是不相等的 而通过Symbol.for()方法创建的symbol值，传入相同的参数名如Symbol.for(‘foo’)，则两次调用返回的symbol值 s1和s2是相等的 本质：在调用Symbol.for的时候，会先去找，如果找到就返回该值，如果找不到，就创建一个新的 3. Js中的异步在es6之前，我们处理异步的方式有如下几种： 回调 事件 Es6提供了 Promise来解决异步问题 12345function * f()&#123; yield … yield … return …&#125; Generator函数在执行的时候并没有真正执行，只是返回了一个遍历器对象 我们可以通过对遍历器对象调用next方法来跑generator函数的内部代码 每调用一次next，对应的generator函数就会从上一次执行的代码结尾处（或函数开头）开始执行，直到遇到下一个yield语句或者return语句，如果遇到yield语句，会将yield语句后面的表达式的值返回，如果遇到return语句，同样会将return后面的表达式的值当成返回值返回，并将返回对象的done置为false Next方法的参数 Yield表达式本身没有返回值，或者说返回值为undefined Next()所传入的参数会被赋值给当前yield表达式的返回值]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>symbol</tag>
-        <tag>Promise</tag>
-        <tag>Generator</tag>
-        <tag>Next</tag>
-        <tag>yield</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Javascript高级 第五天]]></title>
     <url>%2F2017%2F07%2F31%2Fjs-senior05%2F</url>
     <content type="text"><![CDATA[1. PromisePromise是用来解决异步编程的一个规范，Bluebird的库就实现了promise，随后2015年发布的es2015（es6）就已经实现了promise对象 对象的状态不受外界影响 一个promise会有如下三种状态(只会在这三种状态中取一): pending(进行中) resolved(已完成) rejected(已拒绝) (只有promise内部决议方法可以改变promise的状态) 状态一经更改，不会再变 Promise的状态改变只有两种可能： pending =&gt;resolved pending =&gt;rejected 2. Promise构造函数接收方法Promise.all([ p , p2, p3]) 该方法接收一个promise数组，返回一个大promise 外层大promise的决议结果等于传入promise数组内的所有Promise决议的“与”运算的值1234567891011121314151617181920212223242526272829303132333435363738394041function learnHtmlAndCss() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学习html和css&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;html和css基础我学会啦&apos;) resolve(&apos;get them(html css基础)&apos;) &#125; else &#123; console.log(&apos;学习css和html失败&apos;) reject(&apos;学习css和html失败&apos;) &#125; &#125;,7000) &#125;)&#125;function learnJavascriptBase() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学Javascript基础&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;js基础我学会啦&apos;) resolve(&apos;get them(javascript base)&apos;) &#125; else &#123; console.log(&apos;学习js基础失败&apos;) reject(&apos;学习js基础失败&apos;) &#125; &#125;,3000) &#125;)&#125;function learnFrontEnd(...arr) &#123; return Promise.all(arr)&#125;learnFrontEnd(learnJavascriptBase(),learnHtmlAndCss()).then( function (datas) &#123; console.log(&apos;学业已成&apos;) console.log(datas) &#125;, function (error) &#123; console.log(&apos;失败,请努力&apos;) console.log(&apos;失败原因：&apos;+error) &#125;) Promise.race([p, p2, p3]) 该方法接收一个promise数组，返回一个大promise，外层大promise的决议结果等于传入promise数组内的第一个决议的promise的决议结果1234567891011121314151617181920212223242526272829303132333435363738394041function learnHtmlAndCss() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学习html和css&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;html和css基础我学会啦&apos;) resolve(&apos;get them(html css基础)&apos;) &#125; else &#123; console.log(&apos;学习css和html失败&apos;) reject(&apos;学习css和html失败&apos;) &#125; &#125;,7000) &#125;)&#125;function learnJavascriptBase() &#123; return new Promise(function (resolve,reject) &#123; console.log(&apos;开始学Javascript基础&apos;) setTimeout(function () &#123; if (Math.random()&gt;0.5) &#123; console.log(&apos;js基础我学会啦&apos;) resolve(&apos;get them(javascript base)&apos;) &#125; else &#123; console.log(&apos;学习js基础失败&apos;) reject(&apos;学习js基础失败&apos;) &#125; &#125;,3000) &#125;)&#125;function learnSkill(...arr) &#123; return Promise.race(arr)&#125;learnSkill(learnHtmlAndCss(),learnJavascriptBase()).then( function (d) &#123; console.log(d) console.log(&apos;该去学习了&apos;) &#125;, function (e) &#123; console.log(e) console.log(&apos;继续努力&apos;) &#125;) then(f1,f2)方法将会返回一个新的Promise对象，意味着可以链式调用在then方法中f1代表成功回调，f2代表失败回调而在f1和f2中返回值或函数本身运行的状态会影响下一个then方法的抉择而不是抉择f1和f2抉择了下一个then方法的抉择说白了每一个then方法中包含了某个动作 这个动作可能是在成功回调中也可能出现在失败回调中，也可能是独立的两个动作，但是这个then方法只可能走其中一个动作，且这个动作的成功或者失败决定了下一个then方法选择成功回调或者失败回调，而非这个动作出现在上一个then方法的成功回调还是失败回调决定下一个then方法的抉择 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354var p = new Promise(function (resolve,reject) &#123; var r =Math.random() if (r&gt;0.5) &#123; resolve(r) &#125; else &#123; reject(r) &#125;&#125;)p.then(function (data) &#123; console.log(&apos;data:&apos;+data)&#125;,function (err) &#123; console.log(&apos;err:&apos;+err)&#125;)var o = new Promise(function (resolve,reject) &#123; setTimeout(function() &#123; resolve(&apos;promise&apos;) &#125;, 500);&#125;)o.then( function (data) &#123; console.log(&apos;data:&apos;+data) return &apos;second promise&apos; &#125;, function (err) &#123; console.log(&apos;err:&apos;+err) &#125;).then( function (d) &#123; console.log(&apos;d:&apos;+d) &#125;, function (e) &#123; console.log(&apos;e:&apos;+e) &#125;)var getUp = new Promise(function (resolve,reject) &#123; var r = Math.randow() if (r&gt;0.5) &#123; resolve(&apos;起床成功&apos;) &#125; else &#123; reject(&apos;起床失败&apos;) &#125;&#125;)getUp.then( function (d) &#123; console.log(&apos;d:&apos;+d) &#125;, function (e) &#123; console.log(&apos;e:&apos;+e) &#125;)]]></content>
@@ -81,14 +61,31 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Canvas]]></title>
-    <url>%2F2017%2F07%2F31%2Fcanvas%2F</url>
-    <content type="text"><![CDATA[Canvas:使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值 //canvas元素必须有一个id document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;) var canvas = document.getElementById(&apos;canvas&apos;) var ctx = canvas.getContext(&apos;2d&apos;) ctx.fillStyle = &apos;red&apos; ctx.fillRect(10,10,40,40) 用法： 1.先获取canvas dom对象canvas 2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx 3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格， ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点 ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高]]></content>
+    <title><![CDATA[Javascript高级 第四天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior04%2F</url>
+    <content type="text"><![CDATA[1. Js的第七种数据类型 symbol每一个通过symbol生成的数据都是独一无二的，所以不用担心重名的问题以Symbol数据类型为对象键名的时候，无法被for-of或者for-in遍历出来同样也不会被遍历器方法返回（entry() keys()之类的方法）Object.getOwnPropertySymbols( obj )这个方法返回一个数组，里面包含所有symbol属性的键名 *以Symbol类型为键名的键值转字符串会报错 2. Symbol.for()/Symbol.keyfor()每一个通过Symbol（）创建的symbol类型的值都是独一无二的，即便是传入相同的参数或者不传，两个symbol值都是不相等的 而通过Symbol.for()方法创建的symbol值，传入相同的参数名如Symbol.for(‘foo’)，则两次调用返回的symbol值 s1和s2是相等的 本质：在调用Symbol.for的时候，会先去找，如果找到就返回该值，如果找不到，就创建一个新的 3. Js中的异步在es6之前，我们处理异步的方式有如下几种： 回调 事件 Es6提供了 Promise来解决异步问题 12345function * f()&#123; yield … yield … return …&#125; Generator函数在执行的时候并没有真正执行，只是返回了一个遍历器对象 我们可以通过对遍历器对象调用next方法来跑generator函数的内部代码 每调用一次next，对应的generator函数就会从上一次执行的代码结尾处（或函数开头）开始执行，直到遇到下一个yield语句或者return语句，如果遇到yield语句，会将yield语句后面的表达式的值返回，如果遇到return语句，同样会将return后面的表达式的值当成返回值返回，并将返回对象的done置为false Next方法的参数 Yield表达式本身没有返回值，或者说返回值为undefined Next()所传入的参数会被赋值给当前yield表达式的返回值]]></content>
       <categories>
-        <category>Html5</category>
+        <category>Javascript</category>
       </categories>
       <tags>
-        <tag>canvas</tag>
+        <tag>Promise</tag>
+        <tag>symbol</tag>
+        <tag>Generator</tag>
+        <tag>Next</tag>
+        <tag>yield</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Javascript高级 第三天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior03%2F</url>
+    <content type="text"><![CDATA[1. JavaScript面向对象的继承： 类式继承：将父类的实例赋值给子类的原型 12SubClass.prototype = new SupClass()//缺点：子类实例共用父类实例私有属性的引用类型属性部分 构造函数继承：将父类的构造函数在子类的构造函数中执行一遍 1234function SubClass()&#123; SuperClass.call(this)&#125;//缺点：子类实例无法使用父类原型上的扩展方法 组合继承: 将类式继承和构造函数继承结合在一起的继承方式 1234 function SubClass()&#123;SuperClass.call(this) &#125; SubClass.prototype = new SuperClass() 2. JavaScript的多态： 可以通过一些技巧实现多态12345678910111213141516171819//利用arguments对象来实现js的多态 如果传入一个参数则返回10的n次方 两个参数则返回x的n次方,n为正整数function pow(n,x)&#123; var l = arguments.length if(l&gt;2) l = 2 function _f(n,x) &#123; if(n&lt;=0) return &apos;n为正整数&apos; if(n==1) return x return x*_f(n-1,x) &#125; switch(l)&#123; case 1: return _f(n,10) case 2: return _f(n,x) &#125;&#125; 3. Javascript的模块: Common.js规范：nodejs的模块就是根据此规范实现的，针对服务器，这个规范定义了一个require（）的方法 1var $ = require(&apos;jquery&apos;) AMD规范：实现：require.js 123456789Require.js的用法： 1.导入原文件 (a)使用require([ …],function(…)&#123; ... &#125;) (b)使用define([…],function(…)&#123; ... &#125;) //此方法会定义一个模块 *CMD规范：实现：sea.js es6的模块]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>继承</tag>
+        <tag>多态</tag>
+        <tag>模板</tag>
       </tags>
   </entry>
   <entry>
@@ -106,6 +103,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Javascript高级 第一天]]></title>
+    <url>%2F2017%2F07%2F31%2Fjs-senior01%2F</url>
+    <content type="text"><![CDATA[1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&#123; var xx if(!x)&#123; xx = 100 &#125;else&#123; xx = x &#125; return function(n)&#123; console.log(Math.pow(xx,n)) &#125;&#125;//Javascript的作用域是函数级作用域，无块级作用域 2.定义一个函数的几种方法 var f =function(){} function f(){} new Function()/Function(){} 匿名函数与立即执行函数 123456(function()&#123; //...something&#125;)() //匿名函数!function()&#123; //...something&#125;() //立即执行函数 例子(匿名函数与闭包) 123456789101112var lunbo = (function()&#123; var page = 11 var ctx =1 function run()&#123; console.log(&apos;run&apos;) &#125; return&#123; page : page, ctx : ctx, run : run &#125;&#125;)() 3.变量提升 变量声明，函数声明语句会提前 12345678console.log(str) //打印出：aaavar str = &apos;aaa&apos;console.log(str) //打印出：undefinedvar strconsole.log(str) //打印出：undefinedstr = &apos;bbb&apos;console.log(str) //打印出：bbb 函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略) js是基于事件机制的的单线程语言12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455同步队列:[line1,line2,line3]异步队列:[setTimeout]//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利function factory(name,attack,defence,health,skill) &#123; this.name = name; this.attack = attack; this.defence = defence; this.health = health; this.skill = skill; var zet = this ; this.fight = function (target) &#123; var meReduce = target.attack - this.defence var tarReduce = this.attack - target.defence var meBeated = Math.ceil(this.health/meReduce) var tarBeated = Math.ceil(target.health/tarReduce) var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos; var healthM = this.health var healthT = target.health for(var i = 1 ; i&lt;=turns; i++)&#123; healthM -= meReduce healthM = healthM &lt; 0 ? 0 : healthM !function (a,n) &#123; setTimeout(function()&#123; console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a) &#125;,1000*n) &#125;(healthM,i) if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(target.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) break &#125; healthT -= tarReduce healthT = healthT &lt; 0 ? 0 : healthT !function (b,n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b) &#125;,1000*n) &#125;(healthT,i) if(win == &apos;me&apos; &amp;&amp; i == turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) &#125; &#125; &#125;&#125;var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);zilong.fight(xingshi);]]></content>
+      <categories>
+        <category>Javascript</category>
+      </categories>
+      <tags>
+        <tag>定义函数</tag>
+        <tag>变量提升</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ECMAscipt6 es6第一天]]></title>
     <url>%2F2017%2F07%2F31%2FES601%2F</url>
     <content type="text"><![CDATA[1. ECMAsript6 es6 let 和 const 用来声明变量的两个新关键字 let : 1. 不存在变量提升 2.不可以重复声明 3.暂时性死区 4.在块级作用域之外无法访问 const: 1.和let一样的特点 2.用来声明常量，一经赋值，不能更改 3.声明时必须同时赋值 否则报错 4.当const 声明的常量为引用数据类型时，指向的其实是地址，所以可以修改地址指向的数据的内容，但是不能重新指向一个新的数据 5.根据习惯，我们用const命名的变量都是全部大写如PI,GENDER 解构赋值：通过模式匹配去取值赋值 数组的解构赋值： 1.对号入座 [a,b,c] = [1,2,3] a=1 b=2 c=3 2.没有就undefined [a,b,c] = [1] a=1 b=undefined c=undefined 3.可以设置默认值 [a,b=’b’,c=’c’] = [‘a’] a=’a’ b=’b’ c=’c’ 对象的解构赋值： 1.根据键名匹配 2.本质是将匹配到的键名所对应的值赋值给变量，牢记变量的位置 字符串的解构赋值： 1.可以取出一个字符串上的每个字符 2.取出字符串的长度 数值和布尔值的解构赋值： 1.会将数值和布尔值转换成包装对象 函数的解构赋值： 1.默认值 for-of与for-in for-of : 遍历键值 （数组，字符串）可以用for-of的是因为这个对象有遍历器接口 for-in : 遍历键名 （数组，字符串，对象）]]></content>
@@ -120,6 +129,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Canvas]]></title>
+    <url>%2F2017%2F07%2F31%2Fcanvas%2F</url>
+    <content type="text"><![CDATA[Canvas:使用方法：在页面创建一个canvas标签 然后给他的width 和height赋值 //canvas元素必须有一个id document.write(&apos;&lt;canvas width=&quot;400&quot; height=&quot;400&quot; id=&quot;canvas&quot; style=&quot;border:1px solid red&quot;&gt;&lt;/canvas&gt;&apos;) var canvas = document.getElementById(&apos;canvas&apos;) var ctx = canvas.getContext(&apos;2d&apos;) ctx.fillStyle = &apos;red&apos; ctx.fillRect(10,10,40,40) 用法： 1.先获取canvas dom对象canvas 2.用dom对象canvas自带的api getContext(‘2d’)获取一个画笔ctx 3.此时我们就可以用ctx的内置api来画图了ctx.fillStyle改变画笔填充颜色，ctx.fillRect( x,y , w,h)，画一个矩形，xy代表矩形左上角的那个起始点，w代表矩形宽，h为高，ctx.font = “80px 幼圆” 改变画笔插入文本框的字体大小和字体风格， ctx.fillText(‘文本’，x,y) 用画笔在画布上添加文本，x,y为文本框左下角的起始点 ctx.clearRect(x,y,w,h) 清楚一个矩形区域内的所有东西，xy为矩形左上角起始点，w，h为矩形宽高]]></content>
+      <categories>
+        <category>Html5</category>
+      </categories>
+      <tags>
+        <tag>canvas</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ECMAscipt6 es6第二天]]></title>
     <url>%2F2017%2F07%2F31%2FES602%2F</url>
     <content type="text"><![CDATA[1. ES6的模块系统Es6的模块系统现在浏览器还玩不了，需要将写有es6模块系统代码的文件重新编译成浏览器可以识别的低版本js才能运行 Es6的模块主要就是两个关键字 export和import Export是导出（暴露）数据，Import是导入数据 Export方法请记住两种用法: export default +数据 （数据可以是所有数据类型） export { } 对象里面是数据 import方法请记住两种用法，分别对应export的两种用法: import 变量名 from 路径,此时 变量名你可以任意去取名 路径是相对路径的字符串,此时该变量名对应的变量获得的就是路径对应模块所export default出来的数据 import { 变量名 } from 路径,此时变量名要想获得数据，则应该和路径对应的模块所 export {。。。。} 内部的变量名对应，只要对应上了，就可以拿到相应的值，这种场景针对你希望获得某个模块的部分功能，而不是加载整个模块]]></content>
@@ -129,18 +149,6 @@
       <tags>
         <tag>Export</tag>
         <tag>Import</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Javascript高级 第一天]]></title>
-    <url>%2F2017%2F07%2F31%2Fjs-senior01%2F</url>
-    <content type="text"><![CDATA[1. 函数是js中的一等公民 函数可以作为方法，封装一段可以重复使用的代码. 在js中，函数也是对象，js的面向对象是通过函数实现的. 在js中，函数可以用来传递数据.123456789101112function f(x)&#123; var xx if(!x)&#123; xx = 100 &#125;else&#123; xx = x &#125; return function(n)&#123; console.log(Math.pow(xx,n)) &#125;&#125;//Javascript的作用域是函数级作用域，无块级作用域 2.定义一个函数的几种方法 var f =function(){} function f(){} new Function()/Function(){} 匿名函数与立即执行函数 123456(function()&#123; //...something&#125;)() //匿名函数!function()&#123; //...something&#125;() //立即执行函数 例子(匿名函数与闭包) 123456789101112var lunbo = (function()&#123; var page = 11 var ctx =1 function run()&#123; console.log(&apos;run&apos;) &#125; return&#123; page : page, ctx : ctx, run : run &#125;&#125;)() 3.变量提升 变量声明，函数声明语句会提前 12345678console.log(str) //打印出：aaavar str = &apos;aaa&apos;console.log(str) //打印出：undefinedvar strconsole.log(str) //打印出：undefinedstr = &apos;bbb&apos;console.log(str) //打印出：bbb 函数声明优先级高于变量声明(当重名时，变量声明会被自动忽略) js是基于事件机制的的单线程语言12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455同步队列:[line1,line2,line3]异步队列:[setTimeout]//基于异步的js小游戏，技能血量防御攻击，根据防御攻击血量，最终谁获得胜利function factory(name,attack,defence,health,skill) &#123; this.name = name; this.attack = attack; this.defence = defence; this.health = health; this.skill = skill; var zet = this ; this.fight = function (target) &#123; var meReduce = target.attack - this.defence var tarReduce = this.attack - target.defence var meBeated = Math.ceil(this.health/meReduce) var tarBeated = Math.ceil(target.health/tarReduce) var turns = tarBeated &gt;= meBeated ? meBeated : tarBeated var win = turns == meBeated ? &apos;tar&apos; : &apos;me&apos; var healthM = this.health var healthT = target.health for(var i = 1 ; i&lt;=turns; i++)&#123; healthM -= meReduce healthM = healthM &lt; 0 ? 0 : healthM !function (a,n) &#123; setTimeout(function()&#123; console.log(target.name + &apos;使出&apos;+target.skill+&apos;,对&apos;+zet.name+&apos;造成了&apos;+meReduce+&apos;的伤害,&apos;+zet.name+&apos;剩余生命值为:&apos;+a) &#125;,1000*n) &#125;(healthM,i) if(win == &apos;tar&apos; &amp;&amp; i== turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(target.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) break &#125; healthT -= tarReduce healthT = healthT &lt; 0 ? 0 : healthT !function (b,n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;使出&apos;+zet.skill+&apos;对&apos;+target.name+&apos;造成了&apos;+tarReduce+&apos;的伤害,&apos;+target.name+&apos;剩余生命值为:&apos;+b) &#125;,1000*n) &#125;(healthT,i) if(win == &apos;me&apos; &amp;&amp; i == turns)&#123; !function (n) &#123; setTimeout(function () &#123; console.log(zet.name+&apos;赢了！&apos;) &#125;,1000*n) &#125;(i) &#125; &#125; &#125;&#125;var zilong = new factory(&apos;紫龙&apos;,10,10,100,&apos;庐山升龙霸&apos;);var xingshi = new factory(&apos;星矢&apos;,12,-7,110,&apos;天马流星拳&apos;);zilong.fight(xingshi);]]></content>
-      <categories>
-        <category>Javascript</category>
-      </categories>
-      <tags>
-        <tag>定义函数</tag>
-        <tag>变量提升</tag>
       </tags>
   </entry>
 </search>
